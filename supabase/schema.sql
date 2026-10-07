@@ -1,4 +1,5 @@
 -- ABR Supabase Database Schema & RLS Policies
+-- Safe to re-run: drops existing policies/triggers before recreating them.
 
 -- 1. Novels Table
 create table if not exists novels (
@@ -94,31 +95,40 @@ begin
 end;
 $$ language plpgsql;
 
+drop trigger if exists set_updated_at on novels;
 create trigger set_updated_at before update on novels
   for each row execute function update_updated_at_column();
+drop trigger if exists set_updated_at on episodes;
 create trigger set_updated_at before update on episodes
   for each row execute function update_updated_at_column();
+drop trigger if exists set_updated_at on ratings;
 create trigger set_updated_at before update on ratings
   for each row execute function update_updated_at_column();
 
--- RLS Policies
+-- RLS Policies (drop first so this script is re-runnable and old
+-- policies cannot linger alongside new ones)
 
 -- Novels: Public can read published novels; Authenticated users (admin) can do all
+drop policy if exists "Public can view published novels" on novels;
 create policy "Public can view published novels" on novels
   for select using (status = 'published' or auth.role() = 'authenticated');
 
+drop policy if exists "Admin can insert novels" on novels;
 create policy "Admin can insert novels" on novels
   for insert with check (auth.role() = 'authenticated');
 
+drop policy if exists "Admin can update novels" on novels;
 create policy "Admin can update novels" on novels
   for update using (auth.role() = 'authenticated');
 
+drop policy if exists "Admin can delete novels" on novels;
 create policy "Admin can delete novels" on novels
   for delete using (auth.role() = 'authenticated');
 
 -- Episodes: Public can read published episodes of published novels.
 -- A published episode must never leak while its parent novel is still a draft.
 -- Authenticated users (admin) can read everything.
+drop policy if exists "Public can view published episodes" on episodes;
 create policy "Public can view published episodes" on episodes
   for select using (
     (status = 'published'
@@ -129,12 +139,15 @@ create policy "Public can view published episodes" on episodes
     or auth.role() = 'authenticated'
   );
 
+drop policy if exists "Admin can insert episodes" on episodes;
 create policy "Admin can insert episodes" on episodes
   for insert with check (auth.role() = 'authenticated');
 
+drop policy if exists "Admin can update episodes" on episodes;
 create policy "Admin can update episodes" on episodes
   for update using (auth.role() = 'authenticated');
 
+drop policy if exists "Admin can delete episodes" on episodes;
 create policy "Admin can delete episodes" on episodes
   for delete using (auth.role() = 'authenticated');
 
@@ -145,22 +158,32 @@ create policy "Admin can delete episodes" on episodes
 -- intentional for v1 per the project spec; revisit when reader auth exists.
 -- Writes must at least carry a non-empty device_id.
 
+drop policy if exists "Anyone can manage reader profile" on readers;
+drop policy if exists "Anyone can manage their own reader profile" on readers;
 create policy "Anyone can manage their own reader profile" on readers
   for all using (true) with check (device_id is not null and device_id <> '');
 
+drop policy if exists "Anyone can manage favorites" on favorites;
+drop policy if exists "Anyone can manage their own favorites" on favorites;
 create policy "Anyone can manage their own favorites" on favorites
   for all using (true) with check (device_id is not null and device_id <> '');
 
+drop policy if exists "Anyone can manage reading progress" on reading_progress;
+drop policy if exists "Anyone can manage their own reading progress" on reading_progress;
 create policy "Anyone can manage their own reading progress" on reading_progress
   for all using (true) with check (device_id is not null and device_id <> '');
 
+drop policy if exists "Anyone can manage ratings" on ratings;
+drop policy if exists "Anyone can manage their own ratings" on ratings;
 create policy "Anyone can manage their own ratings" on ratings
   for all using (true) with check (device_id is not null and device_id <> '');
 
 -- Notifications: Public can view notifications, admin can insert
+drop policy if exists "Public can view notifications" on notifications;
 create policy "Public can view notifications" on notifications
   for select using (true);
 
+drop policy if exists "Admin can insert notifications" on notifications;
 create policy "Admin can insert notifications" on notifications
   for insert with check (auth.role() = 'authenticated');
 
@@ -171,14 +194,18 @@ insert into storage.buckets (id, name, public)
 values ('novel-covers', 'novel-covers', true)
 on conflict (id) do nothing;
 
+drop policy if exists "Cover images are publicly readable" on storage.objects;
 create policy "Cover images are publicly readable" on storage.objects
   for select using (bucket_id = 'novel-covers');
 
+drop policy if exists "Authenticated users can upload cover images" on storage.objects;
 create policy "Authenticated users can upload cover images" on storage.objects
   for insert with check (bucket_id = 'novel-covers' and auth.role() = 'authenticated');
 
+drop policy if exists "Authenticated users can update cover images" on storage.objects;
 create policy "Authenticated users can update cover images" on storage.objects
   for update using (bucket_id = 'novel-covers' and auth.role() = 'authenticated');
 
+drop policy if exists "Authenticated users can delete cover images" on storage.objects;
 create policy "Authenticated users can delete cover images" on storage.objects
   for delete using (bucket_id = 'novel-covers' and auth.role() = 'authenticated');
