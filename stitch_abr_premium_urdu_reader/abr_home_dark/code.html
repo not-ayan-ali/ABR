@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ur"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ABR - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Nastaliq+Urdu:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "tertiary": "#b9c6eb",
+                        "outline-variant": "#46464d",
+                        "on-surface": "#dce1ff",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#111a36",
+                        "on-tertiary": "#23304d",
+                        "on-tertiary-container": "#707d9f",
+                        "surface-dim": "#08122d",
+                        "on-secondary-container": "#dab36a",
+                        "secondary-fixed-dim": "#e9c176",
+                        "inverse-primary": "#575d78",
+                        "surface-container-lowest": "#040c28",
+                        "outline": "#909098",
+                        "secondary-fixed": "#ffdea5",
+                        "secondary": "#e9c176",
+                        "tertiary-fixed-dim": "#b9c6eb",
+                        "surface-container-highest": "#2b3451",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#bfc5e4",
+                        "surface-bright": "#2f3856",
+                        "on-tertiary-fixed-variant": "#3a4665",
+                        "surface-tint": "#bfc5e4",
+                        "primary-container": "#0a1128",
+                        "on-secondary": "#412d00",
+                        "surface": "#08122d",
+                        "surface-container-high": "#202945",
+                        "on-primary-container": "#767c99",
+                        "secondary-container": "#604403",
+                        "inverse-on-surface": "#272f4c",
+                        "tertiary-container": "#03112d",
+                        "on-secondary-fixed": "#261900",
+                        "on-primary-fixed": "#141a32",
+                        "inverse-surface": "#dce1ff",
+                        "on-primary-fixed-variant": "#3f465f",
+                        "on-tertiary-fixed": "#0d1b37",
+                        "surface-container": "#151e3a",
+                        "on-background": "#dce1ff",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "surface-variant": "#2b3451",
+                        "tertiary-fixed": "#d9e2ff",
+                        "on-primary": "#292f48",
+                        "primary": "#bfc5e4",
+                        "background": "#08122d",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#c6c6ce",
+                        "primary-fixed": "#dce1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "40px",
+                        "container-max": "1200px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Noto Nastaliq Urdu"],
+                        "headline-md": ["Noto Nastaliq Urdu"],
+                        "body-lg": ["Noto Nastaliq Urdu"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Noto Nastaliq Urdu"],
+                        "body-md": ["Noto Nastaliq Urdu"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Noto Nastaliq Urdu"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", { "lineHeight": "80px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "48px", "fontWeight": "600" }],
+                        "body-lg": ["20px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "56px", "fontWeight": "700" }],
+                        "body-md": ["18px", { "lineHeight": "36px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "64px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            /* Hide scrollbar for a cleaner look */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased pb-24 pt-20">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex flex-row-reverse justify-between items-center px-margin-mobile h-16 bg-background border-b border-outline-variant">
+<button class="text-on-background hover:bg-surface-variant rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="font-headline-md text-headline-md text-secondary">
+            ABR
+        </div>
+<button class="text-on-background hover:bg-surface-variant rounded-full p-2 transition-colors opacity-0 pointer-events-none">
+<!-- Hidden placeholder for balance -->
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col gap-8">
+<!-- Featured Banner -->
+<section class="relative w-full rounded-xl overflow-hidden border border-outline-variant bg-surface-container-low mt-4 aspect-[4/3] md:aspect-[21/9]">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="A dramatic cover illustration of a mysterious Urdu novel. The scene depicts an ancient, glowing doorway in a dark alleyway. High contrast lighting with deep navy shadows and warm golden highlights. Premium, painterly art style suitable for a high-end book cover." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQThzCajDrt6uMP9pWtUKBiMHb2LqZXKG17U-SYHQ2kHcyu4hD17YdZrElgHzJ5skX21KwfJXF_AajgtdUMyaC13X8bA76VDcV_YFwZgdH1lkzjA0rDfM9mnRbm4xVpoqYkPJtDbMxwQoF_XimDwIteRAD_fS1uVeFiE0NUJo4nqx6iwFpBafyl5VqNpie_yHlWPPf00gFe5PEOUpRQAk-m7oBF2GlvZNfcvLn2fHTNmzQOsqv65Ojgw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 right-0 p-6 flex flex-col justify-end">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-secondary mb-2 drop-shadow-md">طلسماتی دروازہ</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">از نمرہ احمد</p>
+<div class="flex gap-4">
+<button class="bg-secondary text-on-secondary px-6 py-2 rounded font-label-md text-label-md flex items-center gap-2 hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+                        پڑھنا شروع کریں
+                    </button>
+</div>
+</div>
+</section>
+<!-- Continue Reading -->
+<section>
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline-md text-headline-md text-on-background">پڑھنا جاری رکھیں</h3>
+<button class="text-secondary font-label-md text-label-md hover:text-secondary-fixed transition-colors">سب دیکھیں</button>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 snap-x">
+<!-- Book Card 1 -->
+<div class="min-w-[160px] max-w-[160px] snap-start flex flex-col gap-3 group cursor-pointer">
+<div class="relative w-full aspect-[2/3] rounded-lg overflow-hidden border border-outline-variant group-hover:border-secondary transition-colors">
+<img class="w-full h-full object-cover" data-alt="Cover art for an Urdu novel showing a lone figure walking through a misty, snow-covered forest at dusk. The color palette features cool blues and muted greys, evoking a sense of solitude and mystery. Premium editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR4QTSq59IQS3PGP-2TgsvmdNgbK1tkIkTGfufFGeFgbR36rehlUZrqRGQxVMxc1j0AF0Tf_amDDWzBn-80xQ0QwzSMVCZ1unPTXoMU_ymmL16eIGTA29xjTbg-FB9RDBeCzgBTwhvDcJ84r29rnac0IbaDym1oVzzCHwHOhso_FiA9o14E1FAlcHrlNUd3d5WhXmmhRTPPZCmofC00hQP9WaUPE73CXvu9EFXFiN9VAmoW3gA3uZmZg"/>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-surface-container-highest">
+<div class="h-full bg-secondary w-[65%]"></div>
+</div>
+</div>
+<div>
+<h4 class="font-body-md text-body-md text-on-surface line-clamp-1 group-hover:text-secondary transition-colors">برف کے قیدی</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">باب 12</p>
+</div>
+</div>
+<!-- Book Card 2 -->
+<div class="min-w-[160px] max-w-[160px] snap-start flex flex-col gap-3 group cursor-pointer">
+<div class="relative w-full aspect-[2/3] rounded-lg overflow-hidden border border-outline-variant group-hover:border-secondary transition-colors">
+<img class="w-full h-full object-cover" data-alt="Cover illustration of an ornate, golden pocket watch resting on an old leather-bound manuscript. The lighting is warm and directional, casting long shadows. Intricate details, rich dark browns and gold accents. High-end literary feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQVD-6-laSK8_qP9v-C1zl_sPuhvZeSDZ3nH7HfOLJLX-Xio7MKMVoYIVEIb5KFhKpaFvpjstGqsOuerBAofAw_RyJSBEAPK9dBITqVbVcubZFTwZLuGjIvo_OJLPAp5P2uijH8t0iiNYy0uSc7DoWiz6vn2SSDAyQL8TROOAK8-zAdf7zAf7DRIPcRaekuzoBGjMCsNwbiHmRohsQdBQGW0j4D-ItnbXX44vSedmqkzXWCF2wUueDvQ"/>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-surface-container-highest">
+<div class="h-full bg-secondary w-[20%]"></div>
+</div>
+</div>
+<div>
+<h4 class="font-body-md text-body-md text-on-surface line-clamp-1 group-hover:text-secondary transition-colors">وقت کا سفر</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">باب 3</p>
+</div>
+</div>
+</div>
+</section>
+<!-- New Novels List -->
+<section>
+<div class="flex items-center gap-4 mb-6">
+<h3 class="font-headline-md text-headline-md text-on-background">نئے ناولز</h3>
+<div class="flex-grow h-px bg-outline-variant"></div>
+</div>
+<div class="flex flex-col gap-4">
+<!-- List Item 1 -->
+<div class="flex gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant hover:border-outline transition-colors cursor-pointer group">
+<div class="w-20 h-28 rounded-md overflow-hidden flex-shrink-0 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A striking minimalist cover showing a single, blooming red rose against a dark, textured background. Subtle smoke or mist surrounds the stem. Focus on high contrast and elegant composition. Dark mode editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE1ZiSNKZkiB9qMmMMzl3HTq0q6HshOIi8-gv3bO6HJ1SjuUcwb61OuTaCD8S6TVpgfB-PqDI6tcRNdh2U1Br1VmhtARPxB4s-dWPVyqom4xEX_qBDg2qc19pYX8-cJFpKXGSLNGGrtkJ4Nvb-J1JRYALDrFNkcyknOk3OBBWC2h67UV57ZvVK4IXVsOOuSQRNS4Vnh0COd0HZwNz2iQtl5nnB6l5fABDvq2SixVONArAkZuIscNPrjQ"/>
+</div>
+<div class="flex flex-col justify-center flex-grow">
+<div class="flex justify-between items-start">
+<h4 class="font-body-lg text-body-lg text-on-surface group-hover:text-secondary transition-colors">خوابوں کی تعبیر</h4>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">bookmark_border</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">عمیرہ احمد</p>
+<div class="mt-3 flex items-center gap-3">
+<div class="flex items-center gap-1 px-2 py-1 rounded border border-outline-variant bg-surface-container text-primary text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[14px]">star</span>
+                                4.8
+                            </div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">رومانس</span>
+</div>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="flex gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant hover:border-outline transition-colors cursor-pointer group">
+<div class="w-20 h-28 rounded-md overflow-hidden flex-shrink-0 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Cover art showing an ancient desert city at twilight, illuminated by thousands of small lanterns. The sky is a deep indigo. Epic, vast scale with a sense of historical mystery. High quality concept art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJvv5lQOpIkUM5mnibB-HBCqgLILu3RgmVx721zLd6RkeNJuuVZ6XTrftkO2iW6eW9VGphKfQSvxmWwZHYg8TLVxnllN4IOLmafj9tZIRajYKgRMl4IeErTQXBiCcbWfnxW1QZaQmjpMcr5NeNg6Qd7wZDW8VBGQxpdkqmLbTMNjK7kM4lv9vWUbWhKF9NCGUnxpuQR7a1vmg0zGO1b_KqfPcPglCdHKeEqLXXMovmHvGi400-o_iRUw"/>
+</div>
+<div class="flex flex-col justify-center flex-grow">
+<div class="flex justify-between items-start">
+<h4 class="font-body-lg text-body-lg text-on-surface group-hover:text-secondary transition-colors">ریت کا محل</h4>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">bookmark_border</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">ہاشم ندیم</p>
+<div class="mt-3 flex items-center gap-3">
+<div class="flex items-center gap-1 px-2 py-1 rounded border border-outline-variant bg-surface-container text-primary text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[14px]">star</span>
+                                4.9
+                            </div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">تاریخی</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex flex-row-reverse justify-around items-center px-margin-mobile py-2 bg-background border-t border-outline-variant md:hidden">
+<!-- Tab 1: ہوم (Active) -->
+<button class="flex flex-col items-center justify-center text-secondary bg-secondary-container/20 rounded-xl p-2 w-16 scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-body-md text-body-md mt-1 leading-none">ہوم</span>
+</button>
+<!-- Tab 2: تلاش -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 w-16 hover:bg-surface-container-high transition-colors rounded-xl">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-body-md text-body-md mt-1 leading-none">تلاش</span>
+</button>
+<!-- Tab 3: پسندیدہ -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 w-16 hover:bg-surface-container-high transition-colors rounded-xl">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-body-md text-body-md mt-1 leading-none">پسندیدہ</span>
+</button>
+<!-- Tab 4: سرگرمی -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 w-16 hover:bg-surface-container-high transition-colors rounded-xl">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-body-md text-body-md mt-1 leading-none">سرگرمی</span>
+</button>
+</nav>
+</body></html>

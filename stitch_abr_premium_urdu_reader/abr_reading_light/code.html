@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ur"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ABR - Reading Screen (Light)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "tertiary": "#b9c6eb",
+                        "outline-variant": "#46464d",
+                        "on-surface": "#dce1ff",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#111a36",
+                        "on-tertiary": "#23304d",
+                        "on-tertiary-container": "#707d9f",
+                        "surface-dim": "#08122d",
+                        "on-secondary-container": "#dab36a",
+                        "secondary-fixed-dim": "#e9c176",
+                        "inverse-primary": "#575d78",
+                        "surface-container-lowest": "#040c28",
+                        "outline": "#909098",
+                        "secondary-fixed": "#ffdea5",
+                        "secondary": "#e9c176",
+                        "tertiary-fixed-dim": "#b9c6eb",
+                        "surface-container-highest": "#2b3451",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#bfc5e4",
+                        "surface-bright": "#2f3856",
+                        "on-tertiary-fixed-variant": "#3a4665",
+                        "surface-tint": "#bfc5e4",
+                        "primary-container": "#0a1128",
+                        "on-secondary": "#412d00",
+                        "surface": "#08122d",
+                        "surface-container-high": "#202945",
+                        "on-primary-container": "#767c99",
+                        "secondary-container": "#604403",
+                        "inverse-on-surface": "#272f4c",
+                        "tertiary-container": "#03112d",
+                        "on-secondary-fixed": "#261900",
+                        "on-primary-fixed": "#141a32",
+                        "inverse-surface": "#dce1ff",
+                        "on-primary-fixed-variant": "#3f465f",
+                        "on-tertiary-fixed": "#0d1b37",
+                        "surface-container": "#151e3a",
+                        "on-background": "#dce1ff",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "surface-variant": "#2b3451",
+                        "tertiary-fixed": "#d9e2ff",
+                        "on-primary": "#292f48",
+                        "primary": "#bfc5e4",
+                        "background": "#08122d",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#c6c6ce",
+                        "primary-fixed": "#dce1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "40px",
+                        "container-max": "1200px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Noto Nastaliq Urdu"],
+                        "headline-md": ["Noto Nastaliq Urdu"],
+                        "body-lg": ["Noto Nastaliq Urdu"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Noto Nastaliq Urdu"],
+                        "body-md": ["Noto Nastaliq Urdu"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Noto Nastaliq Urdu"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", { "lineHeight": "80px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "48px", "fontWeight": "600" }],
+                        "body-lg": ["20px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "56px", "fontWeight": "700" }],
+                        "body-md": ["18px", { "lineHeight": "36px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "64px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Light Theme Overrides - Simulating the requested #FDFCF0 off-white background and dark navy text within the bounds of the provided design tokens. Since the prompt asks for a specific light theme that deviates from the provided dark-mode tokens, I will map the intent to the available tokens to the best extent possible while adhering to the prompt's specific requests for background and text colors where explicitly commanded. */
+        .light body {
+            background-color: #FDFCF0;
+            color: #08122d; /* Using surface-dim as a proxy for dark navy */
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #e9c176; /* secondary */
+            border-radius: 10px;
+        }
+        
+        .editorial-divider {
+            border-top: 1px solid #909098; /* outline */
+            margin: 2rem auto;
+            width: 50%;
+            position: relative;
+        }
+        .editorial-divider::after {
+            content: "✦";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #FDFCF0;
+            color: #e9c176; /* secondary */
+            padding: 0 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen font-body-md text-body-md flex flex-col items-center">
+<!-- Reader Top Nav -->
+<header class="fixed top-0 w-full z-50 flex flex-row justify-between items-center px-margin-mobile h-16 border-b border-outline/30 bg-[#FDFCF0]/95 backdrop-blur-sm max-w-container-max">
+<button class="p-2 hover:bg-surface-variant/10 rounded-full transition-colors group flex items-center justify-center">
+<span class="material-symbols-outlined text-[#08122d] group-hover:text-secondary" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<div class="flex-1 flex justify-center">
+<span class="font-headline-md text-headline-md font-bold text-[#08122d]">پیرِ کامل</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-variant/10 rounded-full transition-colors group flex items-center justify-center">
+<span class="material-symbols-outlined text-[#08122d] group-hover:text-secondary" data-icon="text_format">text_format</span>
+</button>
+<button class="p-2 hover:bg-surface-variant/10 rounded-full transition-colors group flex items-center justify-center">
+<span class="material-symbols-outlined text-[#08122d] group-hover:text-secondary" data-icon="bookmark_border">bookmark_border</span>
+</button>
+<button class="p-2 hover:bg-surface-variant/10 rounded-full transition-colors group flex items-center justify-center">
+<span class="material-symbols-outlined text-[#08122d] group-hover:text-secondary" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Reader Progress Bar -->
+<div class="fixed top-16 left-0 w-full h-[2px] bg-outline/20 z-40 max-w-container-max">
+<div class="h-full bg-secondary w-1/3" style="width: 35%;"></div>
+</div>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-[720px] px-margin-mobile md:px-margin-desktop pt-24 pb-32 flex-1 flex flex-col">
+<!-- Chapter Header -->
+<article class="text-center mb-12">
+<span class="font-label-md text-label-md text-outline uppercase tracking-widest block mb-4 font-[Inter]">Chapter 4</span>
+<h1 class="font-headline-xl text-headline-xl text-[#08122d] mb-6">اندھیرے سے اجالے تک</h1>
+<div class="editorial-divider"></div>
+</article>
+<!-- Story Content -->
+<div class="prose max-w-none text-[#08122d] leading-relaxed text-justify space-y-6">
+<p>
+                وہ شام حسبِ معمول خاموش تھی۔ سورج مغرب کی پہاڑیوں کے پیچھے چھپ چکا تھا، اور آسمان پر ہلکی ہلکی سرخی باقی تھی۔ سالار کمرے میں اکیلا بیٹھا، کھڑکی سے باہر پھیلی تاریکی کو دیکھ رہا تھا۔ اس کے ذہن میں خیالات کا ایک طوفان بپا تھا، لیکن چہرے پر وہی پرانی، سرد مہری والی کیفیت طاری تھی۔
+            </p>
+<p>
+                اسے امامہ کی کہی ہوئی وہ آخری بات بار بار یاد آ رہی تھی۔ "تم روشنی کو نہیں پہچان سکتے، کیونکہ تم نے ہمیشہ اندھیرے کو اپنا مسکن بنایا ہے۔" یہ جملہ اس کے لیے ایک چیلنج بن گیا تھا۔ وہ جانتا تھا کہ وہ صحیح کہہ رہی تھی، لیکن اس کا غرور اسے یہ تسلیم کرنے سے روک رہا تھا۔
+            </p>
+<p>
+                کتابوں کا ڈھیر اس کے سامنے میز پر پڑا تھا، لیکن اس کا دھیان کسی ایک کی طرف بھی نہیں تھا۔ وہ ایک عجیب سی کشمکش میں مبتلا تھا۔ ایک طرف اس کا اپنا بنایا ہوا وہ نظریہ حیات تھا جس پر وہ پچھلے کئی سالوں سے قائم تھا، اور دوسری طرف وہ نئی حقیقت تھی جس سے وہ ابھی حال ہی میں روشناس ہوا تھا۔
+            </p>
+<div class="my-10 p-6 border-r-2 border-secondary bg-surface-variant/5">
+<p class="font-headline-md text-headline-md text-secondary-container m-0">
+                    "کبھی کبھی سب سے بڑی ہار، دراصل ایک نئی شروعات ہوتی ہے۔"
+                </p>
+</div>
+<p>
+                رات گہری ہوتی جا رہی تھی، اور اس کے ساتھ ہی اس کے اندر کا انتشار بھی بڑھتا جا رہا تھا۔ اس نے سوچا کہ کیا واقعی انسان اپنی پوری زندگی ایک سراب کے پیچھے بھاگتے ہوئے گزار سکتا ہے؟ اور جب اسے حقیقت کا پتہ چلے، تو کیا اس میں اتنی ہمت ہوتی ہے کہ وہ سب کچھ چھوڑ کر ایک نئے راستے پر چل پڑے؟
+            </p>
+<p>
+                انہی سوچوں میں گم، اس نے فیصلہ کیا کہ وہ صبح سویرے نکلے گا۔ وہ اس جگہ جائے گا جہاں سے اسے ان تمام سوالوں کے جواب مل سکتے تھے۔ وہ جگہ، جہاں امامہ نے اسے جانے کا مشورہ دیا تھا۔
+            </p>
+</div>
+<!-- Chapter Navigation Footer -->
+<div class="mt-16 pt-8 border-t border-outline/30 flex justify-between items-center font-[Inter]">
+<button class="flex flex-col items-start group hover:opacity-80 transition-opacity">
+<span class="font-label-sm text-label-sm text-outline mb-1">Previous</span>
+<span class="font-label-md text-label-md text-[#08122d] flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
+                    Chapter 3
+                </span>
+</button>
+<button class="flex flex-col items-end group hover:opacity-80 transition-opacity">
+<span class="font-label-sm text-label-sm text-outline mb-1">Next</span>
+<span class="font-label-md text-label-md text-secondary flex items-center gap-2">
+                    Chapter 5
+                    <span class="material-symbols-outlined text-[18px]" data-icon="chevron_left">chevron_left</span>
+</span>
+</button>
+</div>
+</main>
+</body></html>

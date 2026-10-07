@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ur"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reading Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "tertiary": "#b9c6eb",
+                        "outline-variant": "#46464d",
+                        "on-surface": "#dce1ff",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#111a36",
+                        "on-tertiary": "#23304d",
+                        "on-tertiary-container": "#707d9f",
+                        "surface-dim": "#08122d",
+                        "on-secondary-container": "#dab36a",
+                        "secondary-fixed-dim": "#e9c176",
+                        "inverse-primary": "#575d78",
+                        "surface-container-lowest": "#040c28",
+                        "outline": "#909098",
+                        "secondary-fixed": "#ffdea5",
+                        "secondary": "#e9c176",
+                        "tertiary-fixed-dim": "#b9c6eb",
+                        "surface-container-highest": "#2b3451",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#bfc5e4",
+                        "surface-bright": "#2f3856",
+                        "on-tertiary-fixed-variant": "#3a4665",
+                        "surface-tint": "#bfc5e4",
+                        "primary-container": "#0a1128",
+                        "on-secondary": "#412d00",
+                        "surface": "#08122d",
+                        "surface-container-high": "#202945",
+                        "on-primary-container": "#767c99",
+                        "secondary-container": "#604403",
+                        "inverse-on-surface": "#272f4c",
+                        "tertiary-container": "#03112d",
+                        "on-secondary-fixed": "#261900",
+                        "on-primary-fixed": "#141a32",
+                        "inverse-surface": "#dce1ff",
+                        "on-primary-fixed-variant": "#3f465f",
+                        "on-tertiary-fixed": "#0d1b37",
+                        "surface-container": "#151e3a",
+                        "on-background": "#dce1ff",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "surface-variant": "#2b3451",
+                        "tertiary-fixed": "#d9e2ff",
+                        "on-primary": "#292f48",
+                        "primary": "#bfc5e4",
+                        "background": "#08122d",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#c6c6ce",
+                        "primary-fixed": "#dce1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "40px",
+                        "container-max": "1200px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Noto Nastaliq Urdu"],
+                        "headline-md": ["Noto Nastaliq Urdu"],
+                        "body-lg": ["Noto Nastaliq Urdu"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Noto Nastaliq Urdu"],
+                        "body-md": ["Noto Nastaliq Urdu"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Noto Nastaliq Urdu"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", { "lineHeight": "80px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "48px", "fontWeight": "600" }],
+                        "body-lg": ["20px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "56px", "fontWeight": "700" }],
+                        "body-md": ["18px", { "lineHeight": "36px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "64px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .text-reading {
+            line-height: 2.2;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background border-b border-outline-variant flex flex-col">
+<div class="flex flex-row-reverse justify-between items-center px-margin-mobile h-16">
+<button class="text-on-background hover:bg-surface-variant rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-secondary font-bold">ABR</h1>
+<button class="text-on-background hover:bg-surface-variant rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="h-[2px] bg-surface-container w-full">
+<div class="h-full bg-secondary w-1/4" style="direction: rtl;"></div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-24 pb-32 px-margin-mobile md:px-margin-desktop max-w-[720px] mx-auto w-full">
+<header class="mb-12 text-center">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">ایپی سوڈ 1</h2>
+<div class="w-16 h-px bg-secondary mx-auto"></div>
+</header>
+<article class="font-body-lg text-body-lg text-reading text-on-surface space-y-8 text-justify">
+<p>
+                رات کا پچھلا پہر تھا، چاروں طرف گہرا سناٹا چھایا ہوا تھا۔ پرانی حویلی کے در و دیوار ایک عجیب سی خاموشی میں لپٹے ہوئے تھے، جیسے کوئی راز سینے میں چھپائے بیٹھے ہوں۔ وہ دھیرے قدموں سے سیڑھیاں اتر رہی تھی، دل کی دھڑکنیں تیز تھیں اور ہر آہٹ پر اسے محسوس ہوتا کہ کوئی اس کا پیچھا کر رہا ہے۔
+            </p>
+<p>
+                باہر سرد ہوا چل رہی تھی جس سے پرانے دروازوں کے بجنے کی آوازیں پیدا ہو رہی تھیں۔ اس نے اپنی شال کو مضبوطی سے لپیٹ لیا۔ اچانک لائبریری کی طرف سے ایک مدھم سی روشنی دکھائی دی۔ وہ ٹھٹک کر رک گئی، اس کا دل چاہا کہ واپس پلٹ جائے، لیکن ایک انجانی کشش اسے اس روشنی کی طرف کھینچ رہی تھی۔
+            </p>
+<p>
+                جیسے ہی وہ لائبریری کے دروازے تک پہنچی، روشنی اچانک غائب ہو گئی اور ایک پراسرار آواز گونجی۔ یہ آواز اس کے اپنے نام کی تھی، جو جیسے برسوں پرانی کسی یاد کا حصہ ہو۔ اس نے ہمت کر کے دروازے کو دھکا دیا اور اندر داخل ہو گئی۔
+            </p>
+</article>
+<!-- Chapter Navigation -->
+<div class="mt-16 pt-8 border-t border-outline-variant flex justify-between items-center">
+<button class="flex items-center gap-2 text-secondary hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+<span class="font-label-md text-label-md">پچھلی</span>
+</button>
+<button class="flex items-center gap-2 text-secondary hover:text-secondary-fixed transition-colors">
+<span class="font-label-md text-label-md">اگلی</span>
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+</div>
+</main>
+</body></html>

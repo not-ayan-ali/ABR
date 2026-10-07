@@ -1,0 +1,15 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Production environment variables must also be set in the
+# Netlify dashboard (Site settings > Environment variables):
+#   VITE_SUPABASE_URL  = https://<your-project-ref>.supabase.co
+#   VITE_SUPABASE_ANON_KEY = <your anon key>
+# Netlify does NOT read .env files at build time — set them in the UI.
+
+[context.production.environment]
+  NODE_ENV = "production"

@@ -1,0 +1,236 @@
+<!DOCTYPE html><html class="dark" dir="rtl" lang="ur"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Name Prompt Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Nastaliq+Urdu:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "tertiary": "#b9c6eb",
+                      "outline-variant": "#46464d",
+                      "on-surface": "#dce1ff",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-low": "#111a36",
+                      "on-tertiary": "#23304d",
+                      "on-tertiary-container": "#707d9f",
+                      "surface-dim": "#08122d",
+                      "on-secondary-container": "#dab36a",
+                      "secondary-fixed-dim": "#e9c176",
+                      "inverse-primary": "#575d78",
+                      "surface-container-lowest": "#040c28",
+                      "outline": "#909098",
+                      "secondary-fixed": "#ffdea5",
+                      "secondary": "#e9c176",
+                      "tertiary-fixed-dim": "#b9c6eb",
+                      "surface-container-highest": "#2b3451",
+                      "error-container": "#93000a",
+                      "primary-fixed-dim": "#bfc5e4",
+                      "surface-bright": "#2f3856",
+                      "on-tertiary-fixed-variant": "#3a4665",
+                      "surface-tint": "#bfc5e4",
+                      "primary-container": "#0a1128",
+                      "on-secondary": "#412d00",
+                      "surface": "#08122d",
+                      "surface-container-high": "#202945",
+                      "on-primary-container": "#767c99",
+                      "secondary-container": "#604403",
+                      "inverse-on-surface": "#272f4c",
+                      "tertiary-container": "#03112d",
+                      "on-secondary-fixed": "#261900",
+                      "on-primary-fixed": "#141a32",
+                      "inverse-surface": "#dce1ff",
+                      "on-primary-fixed-variant": "#3f465f",
+                      "on-tertiary-fixed": "#0d1b37",
+                      "surface-container": "#151e3a",
+                      "on-background": "#dce1ff",
+                      "on-secondary-fixed-variant": "#5d4201",
+                      "surface-variant": "#2b3451",
+                      "tertiary-fixed": "#d9e2ff",
+                      "on-primary": "#292f48",
+                      "primary": "#bfc5e4",
+                      "background": "#08122d",
+                      "error": "#ffb4ab",
+                      "on-surface-variant": "#c6c6ce",
+                      "primary-fixed": "#dce1ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "40px",
+                      "container-max": "1200px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-xl": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "headline-md": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "body-lg": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "body-md": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Noto Nastaliq Urdu"
+                      ]
+              },
+              "fontSize": {
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "80px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "48px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "56px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "64px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Custom styles to handle specific editorial needs */
+        .urdu-text {
+            line-height: 2.2; /* Better line height for Nastaliq */
+        }
+        .input-focus-ring:focus {
+            box-shadow: 0 0 0 1px theme('colors.secondary');
+        }
+        
+        /* Subtle background pattern */
+        .bg-pattern {
+            background-image: radial-gradient(theme('colors.surface-container-highest') 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col antialiased selection:bg-secondary/30 selection:text-secondary">
+<!-- Top App Bar (Semantic Shell - No Navigation for First Launch intent, but maintaining branding) -->
+<header class="fixed top-0 w-full z-50 flex flex-row-reverse justify-center items-center px-margin-mobile h-16 border-b border-outline-variant bg-background/95 backdrop-blur-sm">
+<h1 class="font-headline-md text-headline-md text-secondary">ABR</h1>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex items-center justify-center p-margin-mobile relative pt-24 pb-12 overflow-hidden">
+<!-- Subtle glowing orb effect in the background -->
+
+<!-- Form Container -->
+<div class="w-full max-w-[480px] bg-surface-container border border-outline-variant p-8 md:p-12 rounded flex flex-col items-center text-center relative z-10">
+<!-- Icon/Ornament -->
+<div class="mb-8 w-16 h-16 rounded-full border border-secondary flex items-center justify-center bg-surface-container-high text-secondary">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4 urdu-text w-full">خوش آمدید</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-10 urdu-text max-w-sm">
+                اپنا نام درج کریں تاکہ ہم آپ کے مطالعے کا ریکارڈ رکھ سکیں
+            </p>
+<form class="w-full flex flex-col gap-8" onsubmit="event.preventDefault();">
+<!-- Input Group -->
+<div class="flex flex-col w-full text-right relative group">
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-2 absolute -top-3 right-4 bg-surface-container px-2 z-10 transition-colors group-focus-within:text-secondary" for="username">نام</label>
+<input autocomplete="off" class="w-full bg-surface-container-low border border-outline-variant focus:border-secondary focus:ring-1 focus:ring-secondary text-on-surface font-body-md text-body-md urdu-text px-4 py-4 rounded outline-none transition-all input-focus-ring placeholder:text-on-surface-variant/50" dir="rtl" id="username" name="username" placeholder="آپ کا نام" required="" type="text">
+</div>
+<!-- Primary CTA -->
+<button class="w-full bg-secondary hover:bg-secondary-fixed text-on-secondary font-label-md text-label-md py-4 px-6 rounded transition-colors flex items-center justify-center gap-2 group" type="submit">
+<span class="font-body-md text-body-md mt-1">شروع کریں</span>
+<span class="material-symbols-outlined transform transition-transform group-hover:-translate-x-1">arrow_back</span>
+</button>
+</form>
+<!-- Ornamental bottom divider -->
+<div class="w-24 h-px bg-gradient-to-r from-transparent via-outline-variant to-transparent mt-12"></div>
+</div>
+</main>
+<script>
+        // Simple interaction to simulate button press
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const btn = this.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            // Visual feedback
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span>';
+            btn.classList.add('opacity-80', 'pointer-events-none');
+            
+            // Simulate processing
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('opacity-80', 'pointer-events-none');
+            }, 1000);
+        });
+    </script>
+
+
+</body></html>

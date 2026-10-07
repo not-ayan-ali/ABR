@@ -1,0 +1,324 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Admin Dashboard - ABR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Nastaliq+Urdu:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "tertiary": "#b9c6eb",
+                      "outline-variant": "#46464d",
+                      "on-surface": "#dce1ff",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-low": "#111a36",
+                      "on-tertiary": "#23304d",
+                      "on-tertiary-container": "#707d9f",
+                      "surface-dim": "#08122d",
+                      "on-secondary-container": "#dab36a",
+                      "secondary-fixed-dim": "#e9c176",
+                      "inverse-primary": "#575d78",
+                      "surface-container-lowest": "#040c28",
+                      "outline": "#909098",
+                      "secondary-fixed": "#ffdea5",
+                      "secondary": "#e9c176",
+                      "tertiary-fixed-dim": "#b9c6eb",
+                      "surface-container-highest": "#2b3451",
+                      "error-container": "#93000a",
+                      "primary-fixed-dim": "#bfc5e4",
+                      "surface-bright": "#2f3856",
+                      "on-tertiary-fixed-variant": "#3a4665",
+                      "surface-tint": "#bfc5e4",
+                      "primary-container": "#0a1128",
+                      "on-secondary": "#412d00",
+                      "surface": "#08122d",
+                      "surface-container-high": "#202945",
+                      "on-primary-container": "#767c99",
+                      "secondary-container": "#604403",
+                      "inverse-on-surface": "#272f4c",
+                      "tertiary-container": "#03112d",
+                      "on-secondary-fixed": "#261900",
+                      "on-primary-fixed": "#141a32",
+                      "inverse-surface": "#dce1ff",
+                      "on-primary-fixed-variant": "#3f465f",
+                      "on-tertiary-fixed": "#0d1b37",
+                      "surface-container": "#151e3a",
+                      "on-background": "#dce1ff",
+                      "on-secondary-fixed-variant": "#5d4201",
+                      "surface-variant": "#2b3451",
+                      "tertiary-fixed": "#d9e2ff",
+                      "on-primary": "#292f48",
+                      "primary": "#bfc5e4",
+                      "background": "#08122d",
+                      "error": "#ffb4ab",
+                      "on-surface-variant": "#c6c6ce",
+                      "primary-fixed": "#dce1ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "40px",
+                      "container-max": "1200px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-xl": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "headline-md": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "body-lg": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "body-md": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Noto Nastaliq Urdu"
+                      ]
+              },
+              "fontSize": {
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "80px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "48px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "56px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "64px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- NavigationDrawer -->
+<nav class="bg-surface-container dark:bg-surface-container text-primary dark:text-primary-fixed h-full w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline-variant flex flex-col py-6">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-secondary">ABR Admin</h1>
+</div>
+<div class="flex-1 flex flex-col gap-1 px-2">
+<!-- Active: Dashboard -->
+<a class="bg-secondary-container text-on-secondary-container rounded-lg mx-2 my-1 p-3 flex items-center gap-3 font-label-md text-label-md translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 p-3 flex items-center gap-3 font-label-md text-label-md hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="">Novel Management</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 p-3 flex items-center gap-3 font-label-md text-label-md hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="">Episode Management</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 p-3 flex items-center gap-3 font-label-md text-label-md hover:bg-surface-container-highest transition-all mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen">
+<!-- TopAppBar (Re-purposed for Top Section of Canvas) -->
+<header class="h-16 flex items-center justify-between px-gutter border-b border-outline-variant bg-background w-full">
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-variant rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md">Overview</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-variant rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-gutter flex-1 grid grid-cols-12 gap-gutter">
+<!-- Stat Cards -->
+<div class="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container-low border border-outline-variant p-4 flex flex-col gap-2 rounded-DEFAULT">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Total Novels</span>
+<span class="material-symbols-outlined text-lg">book</span>
+</div>
+<div class="font-headline-md text-headline-md text-secondary">24</div>
+<div class="font-label-sm text-label-sm text-on-primary-container">+2 this month</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low border border-outline-variant p-4 flex flex-col gap-2 rounded-DEFAULT">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Total Episodes</span>
+<span class="material-symbols-outlined text-lg">library_books</span>
+</div>
+<div class="font-headline-md text-headline-md text-secondary">842</div>
+<div class="font-label-sm text-label-sm text-on-primary-container">+15 this week</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low border border-outline-variant p-4 flex flex-col gap-2 rounded-DEFAULT">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Total Reads</span>
+<span class="material-symbols-outlined text-lg">visibility</span>
+</div>
+<div class="font-headline-md text-headline-md text-secondary">12.4k</div>
+<div class="font-label-sm text-label-sm text-on-primary-container">+5% vs last week</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-low border border-outline-variant p-4 flex flex-col gap-2 rounded-DEFAULT">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Avg Rating</span>
+<span class="material-symbols-outlined text-lg">star</span>
+</div>
+<div class="font-headline-md text-headline-md text-secondary">4.8</div>
+<div class="font-label-sm text-label-sm text-on-primary-container">Across 420 reviews</div>
+</div>
+</div>
+<!-- Main Chart Area -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-low border border-outline-variant p-6 rounded-DEFAULT flex flex-col min-h-[400px]">
+<h3 class="font-label-md text-label-md text-on-surface mb-6">Reads over Time</h3>
+<div class="flex-1 relative w-full h-full border-b border-l border-outline-variant">
+<!-- Simple SVG Line Chart Mockup -->
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+<!-- Grid Lines -->
+<line class="text-outline-variant" stroke="currentColor" stroke-width="0.2" x1="0" x2="100" y1="25" y2="25"></line>
+<line class="text-outline-variant" stroke="currentColor" stroke-width="0.2" x1="0" x2="100" y1="50" y2="50"></line>
+<line class="text-outline-variant" stroke="currentColor" stroke-width="0.2" x1="0" x2="100" y1="75" y2="75"></line>
+<!-- Data Line (Gold) -->
+<polyline fill="none" points="0,90 20,70 40,80 60,40 80,50 100,20" stroke="#C5A059" stroke-width="1.5" vector-effect="non-scaling-stroke"></polyline>
+<!-- Area Fill -->
+<polygon fill="#C5A059" fill-opacity="0.15" points="0,100 0,90 20,70 40,80 60,40 80,50 100,20 100,100"></polygon>
+
+</svg>
+<!-- X Axis Labels -->
+<div class="absolute -bottom-6 w-full flex justify-between text-[10px] text-on-surface-variant font-label-sm">
+<span class="">Mon</span>
+<span class="">Wed</span>
+<span class="">Fri</span>
+<span class="">Sun</span>
+</div>
+</div>
+</div>
+<!-- Secondary Chart/List Area -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-low border border-outline-variant p-6 rounded-DEFAULT flex flex-col">
+<h3 class="font-label-md text-label-md text-on-surface mb-6">Category Breakdown</h3>
+<div class="flex-1 flex flex-col justify-center gap-4">
+<!-- Category Item 1 -->
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 bg-secondary rounded-full"></div>
+<div class="flex-1 flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Romance</span>
+<span class="font-label-sm text-label-sm text-on-surface">45%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container h-1 border border-outline-variant rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 45%;"></div>
+</div>
+<!-- Category Item 2 -->
+<div class="flex items-center gap-3 mt-4">
+<div class="w-3 h-3 bg-tertiary rounded-full"></div>
+<div class="flex-1 flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Mystery</span>
+<span class="font-label-sm text-label-sm text-on-surface">30%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container h-1 border border-outline-variant rounded-full overflow-hidden">
+<div class="bg-tertiary h-full" style="width: 30%;"></div>
+</div>
+<!-- Category Item 3 -->
+<div class="flex items-center gap-3 mt-4">
+<div class="w-3 h-3 bg-primary rounded-full"></div>
+<div class="flex-1 flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Historical</span>
+<span class="font-label-sm text-label-sm text-on-surface">25%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container h-1 border border-outline-variant rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 25%;"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+
+</body></html>

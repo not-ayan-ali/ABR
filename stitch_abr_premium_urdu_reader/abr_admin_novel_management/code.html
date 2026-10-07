@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin - Novel Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "tertiary": "#b9c6eb",
+                      "outline-variant": "#46464d",
+                      "on-surface": "#dce1ff",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-low": "#111a36",
+                      "on-tertiary": "#23304d",
+                      "on-tertiary-container": "#707d9f",
+                      "surface-dim": "#08122d",
+                      "on-secondary-container": "#dab36a",
+                      "secondary-fixed-dim": "#e9c176",
+                      "inverse-primary": "#575d78",
+                      "surface-container-lowest": "#040c28",
+                      "outline": "#909098",
+                      "secondary-fixed": "#ffdea5",
+                      "secondary": "#e9c176",
+                      "tertiary-fixed-dim": "#b9c6eb",
+                      "surface-container-highest": "#2b3451",
+                      "error-container": "#93000a",
+                      "primary-fixed-dim": "#bfc5e4",
+                      "surface-bright": "#2f3856",
+                      "on-tertiary-fixed-variant": "#3a4665",
+                      "surface-tint": "#bfc5e4",
+                      "primary-container": "#0a1128",
+                      "on-secondary": "#412d00",
+                      "surface": "#08122d",
+                      "surface-container-high": "#202945",
+                      "on-primary-container": "#767c99",
+                      "secondary-container": "#604403",
+                      "inverse-on-surface": "#272f4c",
+                      "tertiary-container": "#03112d",
+                      "on-secondary-fixed": "#261900",
+                      "on-primary-fixed": "#141a32",
+                      "inverse-surface": "#dce1ff",
+                      "on-primary-fixed-variant": "#3f465f",
+                      "on-tertiary-fixed": "#0d1b37",
+                      "surface-container": "#151e3a",
+                      "on-background": "#dce1ff",
+                      "on-secondary-fixed-variant": "#5d4201",
+                      "surface-variant": "#2b3451",
+                      "tertiary-fixed": "#d9e2ff",
+                      "on-primary": "#292f48",
+                      "primary": "#bfc5e4",
+                      "background": "#08122d",
+                      "error": "#ffb4ab",
+                      "on-surface-variant": "#c6c6ce",
+                      "primary-fixed": "#dce1ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "40px",
+                      "container-max": "1200px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-xl": ["Noto Nastaliq Urdu"],
+                      "headline-md": ["Noto Nastaliq Urdu"],
+                      "body-lg": ["Noto Nastaliq Urdu"],
+                      "label-md": ["Inter"],
+                      "headline-lg-mobile": ["Noto Nastaliq Urdu"],
+                      "body-md": ["Noto Nastaliq Urdu"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Noto Nastaliq Urdu"]
+              },
+              "fontSize": {
+                      "headline-xl": ["40px", {"lineHeight": "80px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "48px", "fontWeight": "600"}],
+                      "body-lg": ["20px", {"lineHeight": "40px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "56px", "fontWeight": "700"}],
+                      "body-md": ["18px", {"lineHeight": "36px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "64px", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .nastaliq { font-family: 'Noto Nastaliq Urdu', serif; }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #08122d; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2b3451; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #46464d; 
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden">
+<!-- Navigation Drawer (Shared Component) -->
+<nav class="bg-surface-container dark:bg-surface-container h-full w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline-variant flex flex-col py-6 z-40 hidden md:flex">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-secondary nastaliq">ABR Admin</h1>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 p-3 flex items-center gap-3 hover:bg-surface-container-highest transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="bg-secondary-container text-on-secondary-container rounded-lg mx-2 my-1 p-3 flex items-center gap-3 hover:bg-surface-container-highest transition-all translate-x-1 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">book</span>
+                Novel Management
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 p-3 flex items-center gap-3 hover:bg-surface-container-highest transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">library_books</span>
+                Episode Management
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 p-3 flex items-center gap-3 hover:bg-surface-container-highest transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- Top App Bar (Mobile Only - Shared Component) -->
+<header class="bg-background dark:bg-background border-b border-outline-variant dark:border-outline-variant fixed top-0 w-full z-50 flex flex-row justify-between items-center px-margin-mobile h-16 md:hidden">
+<button class="text-on-background dark:text-on-background hover:bg-surface-variant dark:hover:bg-surface-variant rounded-full p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-md text-headline-md text-secondary dark:text-secondary-fixed nastaliq">ABR</span>
+<button class="text-on-background dark:text-on-background hover:bg-surface-variant dark:hover:bg-surface-variant rounded-full p-2">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 mt-16 md:mt-0 p-margin-mobile md:p-margin-desktop overflow-y-auto w-full max-w-container-max mx-auto relative">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-background nastaliq mb-1">Novel Management</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Manage your catalog of literary works.</p>
+</div>
+<button class="bg-secondary text-on-secondary px-6 py-3 rounded hover:bg-secondary-fixed-dim transition-colors flex items-center gap-2 font-label-md text-label-md font-semibold" onclick="document.getElementById('create-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                New Novel
+            </button>
+</div>
+<!-- Table Controls -->
+<div class="flex flex-col md:flex-row justify-between items-center bg-surface-container-low border border-outline-variant rounded p-4 mb-6 gap-4">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container border-outline-variant border rounded py-2 pl-10 pr-4 text-on-background font-label-md text-label-md focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-all placeholder:text-on-surface-variant" placeholder="Search novels..." type="text"/>
+</div>
+<div class="flex gap-2 w-full md:w-auto">
+<select class="bg-surface-container border-outline-variant border rounded py-2 px-4 text-on-background font-label-md text-label-md focus:border-secondary focus:outline-none w-full md:w-auto">
+<option>All Status</option>
+<option>Published</option>
+<option>Draft</option>
+</select>
+<select class="bg-surface-container border-outline-variant border rounded py-2 px-4 text-on-background font-label-md text-label-md focus:border-secondary focus:outline-none w-full md:w-auto">
+<option>Newest First</option>
+<option>Oldest First</option>
+<option>A-Z</option>
+</select>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-surface-container-low border border-outline-variant rounded overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="p-4 font-semibold">Cover</th>
+<th class="p-4 font-semibold">Title &amp; Author</th>
+<th class="p-4 font-semibold">Category</th>
+<th class="p-4 font-semibold">Status</th>
+<th class="p-4 font-semibold">Episodes</th>
+<th class="p-4 font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="p-4">
+<div class="w-12 h-16 rounded border border-outline-variant overflow-hidden bg-surface flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A moody, high-contrast digital illustration of a solitary figure walking through a misty, neon-lit alleyway at night. The color palette is dominated by deep navy blues and dark greys, accented by striking vintage gold light spilling from a streetlamp. The style is detailed, evocative, and literary, suitable for a dark modern thriller novel cover." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ7Yp00X-4cAaXjt5Sf7Y8jjabAbkoW31-8ricfMUqbY7_2zmUDXinnAottasF9Wooal_Ejcbc9U3cDFClpkE8c_9uCj5qXgX3WJ-POsh_UDUB6rU1sTbPPKS2Ozv2Z7AQQjo_XopgKUJjUJQB0nlxANSCblmdBFMPHqqE6NsX8as3wXcHDJ570iWakMTNTgKnAWUCgE3YQ21zqL9R4zLUAHcVogei0R8KDVS-y9-mX2GqpC4M2HyMFA"/>
+</div>
+</td>
+<td class="p-4 min-w-[200px]">
+<p class="font-body-md text-body-md text-on-background nastaliq leading-tight mb-1">رات کا سفر</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Ahmad Faraz</p>
+</td>
+<td class="p-4">
+<span class="font-label-sm text-label-sm text-tertiary">Mystery / Thriller</span>
+</td>
+<td class="p-4">
+<div class="inline-flex items-center px-2 py-1 rounded border border-secondary/30 bg-secondary/10 text-secondary font-label-sm text-label-sm">
+                                Published
+                            </div>
+</td>
+<td class="p-4 font-label-md text-label-md text-on-surface-variant">
+                            42
+                        </td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-50 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-secondary transition-colors p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="p-4">
+<div class="w-12 h-16 rounded border border-outline-variant overflow-hidden bg-surface flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="An elegant, minimalist vector art cover featuring a single delicate golden leaf falling against a profound, dark indigo background. The lighting is soft and ethereal, creating a sense of melancholy and historical romance. The aesthetic is clean, premium, and sophisticated, reflecting a high-end literary style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC36HIfYjBALqluSwfpQzwuaT7YpORdw0gEEllq9CQB0_HbwQU5afYeENdJS5TCIGZVEQMYiL3vRhBUyoMMx5BpCHy_aVHyJ1YIedcn5Xsz2_jg5_9cdz_Q1Rjk3ZEbcPLy_SHHkZqLCX0o-mLBSLsbvOk3sARAsWYKIFHYSiQvjbjGJNqZgdYgHj8ZU9QXtBcRw52VUfSZVxCZ4W-1DKZRmGJVBPGep5VZWT5oqRdzdXwvqiGAf3DG6w"/>
+</div>
+</td>
+<td class="p-4 min-w-[200px]">
+<p class="font-body-md text-body-md text-on-background nastaliq leading-tight mb-1">خزاں کے پھول</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Zainab Khan</p>
+</td>
+<td class="p-4">
+<span class="font-label-sm text-label-sm text-tertiary">Historical Romance</span>
+</td>
+<td class="p-4">
+<div class="inline-flex items-center px-2 py-1 rounded border border-outline-variant text-on-surface-variant font-label-sm text-label-sm">
+                                Draft
+                            </div>
+</td>
+<td class="p-4 font-label-md text-label-md text-on-surface-variant">
+                            0
+                        </td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-50 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-secondary transition-colors p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="p-4">
+<div class="w-12 h-16 rounded border border-outline-variant overflow-hidden bg-surface flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant">image</span>
+</div>
+</td>
+<td class="p-4 min-w-[200px]">
+<p class="font-body-md text-body-md text-on-background nastaliq leading-tight mb-1">دیواروں کے پیچھے</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Unknown</p>
+</td>
+<td class="p-4">
+<span class="font-label-sm text-label-sm text-tertiary">Social Drama</span>
+</td>
+<td class="p-4">
+<div class="inline-flex items-center px-2 py-1 rounded border border-outline-variant text-on-surface-variant font-label-sm text-label-sm">
+                                Draft
+                            </div>
+</td>
+<td class="p-4 font-label-md text-label-md text-on-surface-variant">
+                            12
+                        </td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-50 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-secondary transition-colors p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="p-4 border-t border-outline-variant flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Showing 1 to 3 of 124 novels</span>
+<div class="flex gap-1">
+<button class="p-1 border border-outline-variant rounded hover:bg-surface hover:text-on-surface disabled:opacity-50"><span class="material-symbols-outlined text-[16px]">chevron_left</span></button>
+<button class="px-3 py-1 border border-secondary bg-secondary/10 text-secondary rounded">1</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface hover:text-on-surface">2</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface hover:text-on-surface">3</button>
+<button class="p-1 border border-outline-variant rounded hover:bg-surface hover:text-on-surface"><span class="material-symbols-outlined text-[16px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+</main>
+<!-- Create Novel Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden" id="create-modal">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-background/80 backdrop-blur-sm" onclick="document.getElementById('create-modal').classList.add('hidden')"></div>
+<!-- Modal Drawer (Right aligned) -->
+<div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-surface border-l border-outline-variant flex flex-col shadow-2xl transform transition-transform duration-300 translate-x-0">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h3 class="font-headline-md text-headline-md text-on-background nastaliq">Create New Novel</h3>
+<button class="text-on-surface-variant hover:text-on-background transition-colors" onclick="document.getElementById('create-modal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 overflow-y-auto flex-1 flex flex-col gap-6">
+<!-- Cover Upload -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Cover Image</label>
+<div class="border-2 border-dashed border-outline-variant rounded-lg h-40 flex flex-col items-center justify-center text-on-surface-variant hover:border-secondary hover:text-secondary transition-colors cursor-pointer bg-surface-container-lowest">
+<span class="material-symbols-outlined text-3xl mb-2">upload_file</span>
+<span class="font-label-sm text-label-sm">Click to upload cover art</span>
+<span class="text-[10px] mt-1 opacity-70">720x1080px recommended</span>
+</div>
+</div>
+<!-- Title Input -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Novel Title (Urdu)</label>
+<input class="bg-surface-container-lowest border border-outline-variant rounded p-3 text-on-background font-body-md text-body-md nastaliq focus:border-secondary focus:border-2 focus:outline-none transition-all placeholder:text-outline" dir="rtl" placeholder="عنوان درج کریں" type="text"/>
+</div>
+<!-- Author Input -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Author Name</label>
+<input class="bg-surface-container-lowest border border-outline-variant rounded p-3 text-on-background font-label-md text-label-md focus:border-secondary focus:border-2 focus:outline-none transition-all placeholder:text-outline-variant" placeholder="Enter author name" type="text"/>
+</div>
+<!-- Category Select -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Category</label>
+<select class="bg-surface-container-lowest border border-outline-variant rounded p-3 text-on-background font-label-md text-label-md focus:border-secondary focus:border-2 focus:outline-none transition-all">
+<option>Select a category...</option>
+<option>Romance</option>
+<option>Thriller / Mystery</option>
+<option>Social Issues</option>
+<option>Historical</option>
+</select>
+</div>
+<!-- Synopsis Textarea -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Synopsis (Urdu)</label>
+<textarea class="bg-surface-container-lowest border border-outline-variant rounded p-3 text-on-background font-body-md text-body-md nastaliq focus:border-secondary focus:border-2 focus:outline-none transition-all resize-none placeholder:text-outline" dir="rtl" placeholder="ناول کا خلاصہ درج کریں..." rows="5"></textarea>
+</div>
+<!-- Status Toggle -->
+<div class="flex items-center justify-between border border-outline-variant rounded p-4 bg-surface-container-lowest">
+<div>
+<p class="font-label-md text-label-md text-on-background font-semibold">Publish Immediately</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Set to draft if unchecked.</p>
+</div>
+<button class="w-12 h-6 rounded-full bg-surface-container-high border border-outline-variant relative transition-colors" onclick="this.classList.toggle('bg-secondary'); this.querySelector('div').classList.toggle('translate-x-6'); this.querySelector('div').classList.toggle('bg-on-secondary');">
+<div class="w-4 h-4 rounded-full bg-outline-variant absolute left-1 top-1 transition-transform"></div>
+</button>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant bg-surface-container-low flex justify-end gap-4">
+<button class="px-6 py-2 border border-secondary text-secondary rounded hover:bg-secondary/10 transition-colors font-label-md text-label-md font-semibold" onclick="document.getElementById('create-modal').classList.add('hidden')">
+                    Cancel
+                </button>
+<button class="px-6 py-2 bg-secondary text-on-secondary rounded hover:bg-secondary-fixed-dim transition-colors font-label-md text-label-md font-semibold">
+                    Create Novel
+                </button>
+</div>
+</div>
+</div>
+</body></html>

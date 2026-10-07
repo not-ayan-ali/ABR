@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ur"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile - My Activity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&amp;family=Inter:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "tertiary": "#b9c6eb",
+                        "outline-variant": "#46464d",
+                        "on-surface": "#dce1ff",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#111a36",
+                        "on-tertiary": "#23304d",
+                        "on-tertiary-container": "#707d9f",
+                        "surface-dim": "#08122d",
+                        "on-secondary-container": "#dab36a",
+                        "secondary-fixed-dim": "#e9c176",
+                        "inverse-primary": "#575d78",
+                        "surface-container-lowest": "#040c28",
+                        "outline": "#909098",
+                        "secondary-fixed": "#ffdea5",
+                        "secondary": "#e9c176",
+                        "tertiary-fixed-dim": "#b9c6eb",
+                        "surface-container-highest": "#2b3451",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#bfc5e4",
+                        "surface-bright": "#2f3856",
+                        "on-tertiary-fixed-variant": "#3a4665",
+                        "surface-tint": "#bfc5e4",
+                        "primary-container": "#0a1128",
+                        "on-secondary": "#412d00",
+                        "surface": "#08122d",
+                        "surface-container-high": "#202945",
+                        "on-primary-container": "#767c99",
+                        "secondary-container": "#604403",
+                        "inverse-on-surface": "#272f4c",
+                        "tertiary-container": "#03112d",
+                        "on-secondary-fixed": "#261900",
+                        "on-primary-fixed": "#141a32",
+                        "inverse-surface": "#dce1ff",
+                        "on-primary-fixed-variant": "#3f465f",
+                        "on-tertiary-fixed": "#0d1b37",
+                        "surface-container": "#151e3a",
+                        "on-background": "#dce1ff",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "surface-variant": "#2b3451",
+                        "tertiary-fixed": "#d9e2ff",
+                        "on-primary": "#292f48",
+                        "primary": "#bfc5e4",
+                        "background": "#08122d",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#c6c6ce",
+                        "primary-fixed": "#dce1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "40px",
+                        "container-max": "1200px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Noto Nastaliq Urdu"],
+                        "headline-md": ["Noto Nastaliq Urdu"],
+                        "body-lg": ["Noto Nastaliq Urdu"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Noto Nastaliq Urdu"],
+                        "body-md": ["Noto Nastaliq Urdu"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Noto Nastaliq Urdu"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", { "lineHeight": "80px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "48px", "fontWeight": "600" }],
+                        "body-lg": ["20px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "56px", "fontWeight": "700" }],
+                        "body-md": ["18px", { "lineHeight": "36px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "64px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col pt-16 pb-24 md:pb-0 md:pt-0">
+<!-- Mobile Top App Bar (Hidden on md) -->
+<header class="fixed top-0 w-full z-50 flex flex-row-reverse justify-between items-center px-margin-mobile h-16 bg-background dark:bg-background border-b border-outline-variant dark:border-outline-variant md:hidden">
+<div class="font-headline-md text-headline-md text-secondary dark:text-secondary-fixed">ABR</div>
+<button class="text-on-background dark:text-on-background hover:bg-surface-variant dark:hover:bg-surface-variant rounded-full p-2">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<div class="flex flex-1 w-full max-w-container-max mx-auto">
+<!-- Navigation Drawer (Visible on md) -->
+<nav class="hidden md:flex flex-col h-full py-6 w-64 fixed left-0 top-0 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant">
+<div class="font-headline-md text-headline-md font-bold text-secondary px-6 mb-8 text-left">ABR Admin</div>
+<div class="flex-1 flex flex-col gap-2">
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 p-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 p-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="font-label-md text-label-md">Novel Management</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 p-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-md text-label-md">Episode Management</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 p-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 px-margin-mobile md:px-margin-desktop md:mr-64 w-full">
+<div class="max-w-2xl mx-auto py-8">
+<!-- Profile Header -->
+<div class="mb-12 text-center">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">میرا پروفائل</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">آپ کی سرگرمیاں اور ترتیبات</p>
+</div>
+<!-- Activity Links List -->
+<div class="flex flex-col gap-4">
+<!-- Reading History -->
+<a class="group flex items-center justify-between p-4 bg-surface-container-low border border-outline-variant rounded-lg hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-surface-variant rounded-full text-secondary group-hover:bg-secondary-container group-hover:text-on-secondary-container transition-colors">
+<span class="material-symbols-outlined">history</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">تاریخ مطالعہ</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors rtl:rotate-180">arrow_forward_ios</span>
+</a>
+<!-- Favorite Novels -->
+<a class="group flex items-center justify-between p-4 bg-surface-container-low border border-outline-variant rounded-lg hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-surface-variant rounded-full text-secondary group-hover:bg-secondary-container group-hover:text-on-secondary-container transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">پسندیدہ ناولز</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors rtl:rotate-180">arrow_forward_ios</span>
+</a>
+<!-- Settings -->
+<a class="group flex items-center justify-between p-4 bg-surface-container-low border border-outline-variant rounded-lg hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-surface-variant rounded-full text-secondary group-hover:bg-secondary-container group-hover:text-on-secondary-container transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">ترتیبات</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors rtl:rotate-180">arrow_forward_ios</span>
+</a>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Bottom Nav Bar (Hidden on md) -->
+<nav class="fixed bottom-0 w-full z-50 flex flex-row-reverse justify-around items-center px-margin-mobile py-2 bg-background dark:bg-background border-t border-outline-variant dark:border-outline-variant md:hidden">
+<!-- Activity (Active) -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary bg-secondary-container/20 rounded-xl p-2 scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-body-md text-body-md mt-1">سرگرمی</span>
+</a>
+<!-- Favorites -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-body-md text-body-md mt-1">پسندیدہ</span>
+</a>
+<!-- Search -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-body-md text-body-md mt-1">تلاش</span>
+</a>
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-body-md text-body-md mt-1">ہوم</span>
+</a>
+</nav>
+</body></html>

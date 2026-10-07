@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ur"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Novel Details - ABR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Nastaliq+Urdu:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "tertiary": "#b9c6eb",
+                      "outline-variant": "#46464d",
+                      "on-surface": "#dce1ff",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-low": "#111a36",
+                      "on-tertiary": "#23304d",
+                      "on-tertiary-container": "#707d9f",
+                      "surface-dim": "#08122d",
+                      "on-secondary-container": "#dab36a",
+                      "secondary-fixed-dim": "#e9c176",
+                      "inverse-primary": "#575d78",
+                      "surface-container-lowest": "#040c28",
+                      "outline": "#909098",
+                      "secondary-fixed": "#ffdea5",
+                      "secondary": "#e9c176",
+                      "tertiary-fixed-dim": "#b9c6eb",
+                      "surface-container-highest": "#2b3451",
+                      "error-container": "#93000a",
+                      "primary-fixed-dim": "#bfc5e4",
+                      "surface-bright": "#2f3856",
+                      "on-tertiary-fixed-variant": "#3a4665",
+                      "surface-tint": "#bfc5e4",
+                      "primary-container": "#0a1128",
+                      "on-secondary": "#412d00",
+                      "surface": "#08122d",
+                      "surface-container-high": "#202945",
+                      "on-primary-container": "#767c99",
+                      "secondary-container": "#604403",
+                      "inverse-on-surface": "#272f4c",
+                      "tertiary-container": "#03112d",
+                      "on-secondary-fixed": "#261900",
+                      "on-primary-fixed": "#141a32",
+                      "inverse-surface": "#dce1ff",
+                      "on-primary-fixed-variant": "#3f465f",
+                      "on-tertiary-fixed": "#0d1b37",
+                      "surface-container": "#151e3a",
+                      "on-background": "#dce1ff",
+                      "on-secondary-fixed-variant": "#5d4201",
+                      "surface-variant": "#2b3451",
+                      "tertiary-fixed": "#d9e2ff",
+                      "on-primary": "#292f48",
+                      "primary": "#bfc5e4",
+                      "background": "#08122d",
+                      "error": "#ffb4ab",
+                      "on-surface-variant": "#c6c6ce",
+                      "primary-fixed": "#dce1ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "40px",
+                      "container-max": "1200px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-xl": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "headline-md": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "body-lg": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "body-md": [
+                              "Noto Nastaliq Urdu"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Noto Nastaliq Urdu"
+                      ]
+              },
+              "fontSize": {
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "80px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "48px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "56px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "64px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .nastaliq-leading { line-height: 2.0; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- Top Navigation (Task-Focused - suppressing main shell nav, using a contextual back nav) -->
+<header class="fixed top-0 w-full z-50 bg-background border-b border-outline-variant h-16 flex items-center px-margin-mobile">
+<button class="flex items-center text-on-surface-variant hover:text-primary transition-colors">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex-1 text-center">
+<span class="font-headline-md text-headline-md text-secondary">ABR</span>
+</div>
+<div class="w-6"></div> <!-- Spacer for centering -->
+</header>
+<main class="pt-20 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Cover Art Section -->
+<div class="md:col-span-5 lg:col-span-4 flex justify-center md:justify-end">
+<div class="relative w-48 md:w-full max-w-[320px] aspect-[2/3] border border-outline-variant rounded bg-surface-container-low overflow-hidden">
+<img alt="Novel Cover" class="w-full h-full object-cover" data-alt="A highly detailed cover art for an Urdu novel set in a mystical, ancient city. The scene is rendered in deep twilight navy and gold tones, featuring a solitary figure overlooking grand, silhouetted architectural domes. The mood is quiet, intellectual, and literary, perfectly matching a premium, traditional editorial design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCASSgfRjEPmtfW4TcfpUfIitWLgYHj6kUSNd-8mx1HBOp8tQHcYyZwnqB_oa_V83xYrWEMboklmzHCj5IEtymyDCjMIrkooSnPvir3Fq-WT5jKq6EQXLRot3lyi66DKJecvbtZcYtAsao5I-xZQKrJ9U5hRy1BJvVksAoaAJi8YTax4_Iyf74AnEFiyohxHAbjxaCR6HRJJr9NF0ZaHYWjGg-NWrLPIuBOEyeMvp43nljPtL7di9UDkg"/>
+</div>
+</div>
+<!-- Novel Details Section -->
+<div class="md:col-span-7 lg:col-span-8 flex flex-col pt-6 md:pt-0">
+<div class="flex flex-col gap-2 border-b border-outline-variant pb-6 mb-6">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">شہرِ طلسمات</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">از عبداللہ طارق</p>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center text-secondary">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm text-outline-variant" data-icon="star_half">star_half</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mr-2" dir="ltr">4.5 (120)</span>
+</div>
+<div class="h-4 border-r border-outline-variant"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">45 اقساط</span>
+</div>
+<div class="flex flex-wrap gap-2 mt-4">
+<span class="border border-outline-variant px-3 py-1 rounded font-label-sm text-label-sm text-on-surface-variant">پراسرار</span>
+<span class="border border-outline-variant px-3 py-1 rounded font-label-sm text-label-sm text-on-surface-variant">تاریخی</span>
+<span class="border border-outline-variant px-3 py-1 rounded font-label-sm text-label-sm text-on-surface-variant">رومانوی</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="bg-secondary text-on-secondary border border-secondary hover:bg-secondary-fixed-dim transition-colors rounded px-6 py-3 font-label-md text-label-md w-full md:w-auto self-start mb-8 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                    مطالعہ شروع کریں
+                </button>
+<!-- Synopsis -->
+<div class="mb-10">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">خلاصہ</h2>
+<p class="font-body-md text-body-md text-on-surface nastaliq-leading">
+                        یہ کہانی ایک ایسے قدیم شہر کی ہے جہاں جادو اور حقیقت کے درمیان کی لکیریں مٹ چکی ہیں۔ ہیرو، جو اپنے ماضی کی تلاش میں ہے، اس شہر کے تاریک رازوں سے پردہ اٹھاتا ہے۔ ہر قدم پر ایک نیا اسرار اس کا منتظر ہے۔ کیا وہ ان طلسماتی طاقتوں کا مقابلہ کر پائے گا جو اسے تباہ کرنے کے درپے ہیں؟
+                    </p>
+</div>
+<!-- Episodes List -->
+<div>
+<h2 class="font-headline-md text-headline-md text-primary mb-4 flex justify-between items-center border-b border-outline-variant pb-2">
+                        اقساط
+                        <a class="font-label-sm text-label-sm text-secondary hover:text-secondary-fixed transition-colors" href="#">سب دیکھیں</a>
+</h2>
+<div class="flex flex-col border border-outline-variant rounded bg-surface-container-low divide-y divide-outline-variant">
+<!-- Episode 1 -->
+<a class="p-4 hover:bg-surface-container transition-colors flex items-center justify-between group" href="#">
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface group-hover:text-primary transition-colors">قسط نمبر ۱</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">اشاعت: ۱۲ اکتوبر ۲۰۲۳</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-secondary transition-colors" data-icon="chevron_left">chevron_left</span>
+</a>
+<!-- Episode 2 -->
+<a class="p-4 hover:bg-surface-container transition-colors flex items-center justify-between group" href="#">
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface group-hover:text-primary transition-colors">قسط نمبر ۲</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">اشاعت: ۱۹ اکتوبر ۲۰۲۳</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-secondary transition-colors" data-icon="chevron_left">chevron_left</span>
+</a>
+<!-- Episode 3 -->
+<a class="p-4 hover:bg-surface-container transition-colors flex items-center justify-between group" href="#">
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface group-hover:text-primary transition-colors">قسط نمبر ۳</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">اشاعت: ۲۶ اکتوبر ۲۰۲۳</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-secondary transition-colors" data-icon="chevron_left">chevron_left</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
