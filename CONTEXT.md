@@ -72,3 +72,10 @@ All screen designs reside in `stitch_abr_premium_urdu_reader/`:
 ## 7. Gaps & Clarifications
 - Note that `stitch_abr_premium_urdu_reader/` contains the exact reference images and mockups (`screen.png` and `code.html`) for all screens specified in the PRD and instructions.
 - The design references use `stitch_abr_premium_urdu_reader` as the parent folder instead of `design-reference/`, which is fully compatible with instructions.md.
+- **Privacy Policy:** Added in-app Privacy Policy screen (`abr-mobile/app/privacy.tsx`), hosted web page (`abr-admin/public/privacy.html`), name-prompt policy agreement link, and data deletion in Settings (`abr-mobile/app/settings.tsx`).
+- **Code Review Resolutions (Groups A–E):**
+  - **Group A (Blockers):** Fixed import paths, fixed dynamic route param (`episodeId`), replaced invalid `lucide-react-native` icon exports (`ArrowLeft`/`ArrowRight`), fixed `app.json` asset paths, and integrated official ABR logo.
+  - **Group B (Features):** Added "View all episodes" button on Novel Details, implemented scroll position save & restore in Reading screen, used `router.replace` for chapter navigation, added top bar header on Settings, added gold active tab icons, added missing cover image placeholder fallbacks, persisted reading font size, and added top bar theme toggle.
+  - **Group C (Data Correctness & Error Handling):** Handled Supabase write errors with Urdu error messages, trimmed names and added `maxLength={40}`, used `.maybeSingle()` for optional lookups, fixed `onConflict` comma-space strings, and secured device ID with `Crypto.randomUUID()`.
+  - **Group D (First-Launch RTL):** Added first-launch reload mechanism using `expo-updates` to ensure RTL layout applies immediately on fresh install.
+  - **Group E (Security Hardening):** Configured Supabase `x-device-id` header injection in `supabase.ts` and updated `schema.sql` RLS policies and `novel_rating_summaries` view to scope user data to device ID.

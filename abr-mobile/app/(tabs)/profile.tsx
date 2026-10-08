@@ -21,11 +21,21 @@ export default function ProfileScreen() {
   }, []);
 
   const saveUsername = async () => {
-    if (!username.trim()) return;
-    const deviceId = await getDeviceId();
-    await AsyncStorage.setItem('username', username);
-    await supabase.from('readers').upsert({ device_id: deviceId, username });
-    setIsEditing(false);
+    const trimmed = username.trim();
+    if (!trimmed) return;
+    try {
+      const deviceId = await getDeviceId();
+      const { error } = await supabase.from('readers').upsert({ device_id: deviceId, username: trimmed });
+      if (error) {
+        alert('محفوظ نہیں ہو سکا، دوبارہ کوشش کریں۔');
+        return;
+      }
+      await AsyncStorage.setItem('username', trimmed);
+      setUsername(trimmed);
+      setIsEditing(false);
+    } catch (e) {
+      alert('محفوظ نہیں ہو سکا، دوبارہ کوشش کریں۔');
+    }
   };
 
   return (
@@ -37,6 +47,7 @@ export default function ProfileScreen() {
               style={[styles.input, { color: theme.onSurface, borderColor: theme.outlineVariant }]}
               value={username}
               onChangeText={setUsername}
+              maxLength={40}
             />
             <Pressable onPress={saveUsername} style={[styles.saveBtn, { backgroundColor: theme.secondary }]}>
               <Text style={{ color: theme.onSecondary }}>محفوظ کریں</Text>

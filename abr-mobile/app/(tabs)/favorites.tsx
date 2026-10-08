@@ -5,7 +5,7 @@ import { supabase } from '../../src/lib/supabase';
 import { useTheme } from '../../src/theme/ThemeProvider';
 import { typography } from '../../src/theme/typography';
 import { getDeviceId } from '../../src/lib/deviceId';
-import { Heart } from 'lucide-react-native';
+import { Heart, BookOpen } from 'lucide-react-native';
 
 export default function FavoritesScreen() {
   const [favorites, setFavorites] = useState<any[]>([]);
@@ -71,7 +71,13 @@ export default function FavoritesScreen() {
             style={[styles.card, { borderColor: theme.outlineVariant, backgroundColor: theme.surfaceContainer }]}
             onPress={() => router.push(`/novel/${item.id}` as any)}
           >
-            <Image source={{ uri: item.cover_image_url }} style={styles.cover} />
+            {item.cover_image_url ? (
+              <Image source={{ uri: item.cover_image_url }} style={styles.cover} />
+            ) : (
+              <View style={[styles.cover, styles.coverPlaceholder, { backgroundColor: theme.surfaceContainerHigh }]}>
+                <BookOpen size={24} color={theme.secondary} />
+              </View>
+            )}
             <View style={styles.info}>
               <Text style={[typography.labelMd, { color: theme.onSurface }]}>{item.title}</Text>
               <Text style={[typography.labelSm, { color: theme.onSurfaceVariant }]}>{item.author}</Text>
@@ -110,6 +116,7 @@ const styles = StyleSheet.create({
   centerState: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 60 },
   card: { flexDirection: 'row', marginBottom: 12, borderRadius: 6, borderWidth: 1, overflow: 'hidden', alignItems: 'center' },
   cover: { width: 60, height: 80 },
+  coverPlaceholder: { justifyContent: 'center', alignItems: 'center' },
   info: { padding: 8, justifyContent: 'center', flex: 1 },
   heartButton: { padding: 12 }
 });

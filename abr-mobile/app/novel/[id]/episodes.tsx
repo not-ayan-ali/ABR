@@ -5,7 +5,7 @@ import { supabase } from '../../../src/lib/supabase';
 import { useTheme } from '../../../src/theme/ThemeProvider';
 import { typography } from '../../../src/theme/typography';
 import { getDeviceId } from '../../../src/lib/deviceId';
-import { ArrowBack, ArrowForward } from 'lucide-react-native';
+import { ArrowLeft, ArrowRight } from 'lucide-react-native';
 
 export default function EpisodesList() {
   const { id } = useLocalSearchParams();
@@ -15,7 +15,7 @@ export default function EpisodesList() {
   const [error, setError] = useState(false);
   const { theme } = useTheme();
   const router = useRouter();
-  const BackIcon = I18nManager.isRTL ? ArrowForward : ArrowBack;
+  const BackIcon = I18nManager.isRTL ? ArrowRight : ArrowLeft;
 
   useEffect(() => {
     fetchEpisodes();

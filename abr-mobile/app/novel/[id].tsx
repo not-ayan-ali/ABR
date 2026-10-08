@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { View, Text, Image, Pressable, ScrollView, StyleSheet, ActivityIndicator, I18nManager } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { supabase } from '../../../src/lib/supabase';
-import { useTheme } from '../../../src/theme/ThemeProvider';
-import { typography } from '../../../src/theme/typography';
-import { getDeviceId } from '../../../src/lib/deviceId';
-import { Heart, Star, ArrowBack, ArrowForward } from 'lucide-react-native';
+import { supabase } from '../../src/lib/supabase';
+import { useTheme } from '../../src/theme/ThemeProvider';
+import { typography } from '../../src/theme/typography';
+import { getDeviceId } from '../../src/lib/deviceId';
+import { Heart, Star, ArrowLeft, ArrowRight, BookOpen } from 'lucide-react-native';
 
 export default function NovelDetails() {
   const { id } = useLocalSearchParams();
@@ -20,7 +20,7 @@ export default function NovelDetails() {
   const [lastReadEpisodeId, setLastReadEpisodeId] = useState<string | null>(null);
   const { theme } = useTheme();
   const router = useRouter();
-  const BackIcon = I18nManager.isRTL ? ArrowForward : ArrowBack;
+  const BackIcon = I18nManager.isRTL ? ArrowRight : ArrowLeft;
 
   useEffect(() => {
     fetchNovel();
@@ -63,10 +63,10 @@ export default function NovelDetails() {
         }
       }
 
-      const { data: fav } = await supabase.from('favorites').select('*').eq('novel_id', id).eq('device_id', deviceId).single();
+      const { data: fav } = await supabase.from('favorites').select('*').eq('novel_id', id).eq('device_id', deviceId).maybeSingle();
       setIsFavorite(!!fav);
 
-      const { data: myRating } = await supabase.from('ratings').select('rating').eq('novel_id', id).eq('device_id', deviceId).single();
+      const { data: myRating } = await supabase.from('ratings').select('rating').eq('novel_id', id).eq('device_id', deviceId).maybeSingle();
       if (myRating) setUserRating(myRating.rating);
 
       const { data: allRatings } = await supabase.from('ratings').select('rating').eq('novel_id', id);
@@ -83,25 +83,45 @@ export default function NovelDetails() {
   };
 
   const toggleFavorite = async () => {
-    const deviceId = await getDeviceId();
-    if (isFavorite) {
-      await supabase.from('favorites').delete().eq('novel_id', id).eq('device_id', deviceId);
-    } else {
-      await supabase.from('favorites').insert({ novel_id: id, device_id: deviceId });
+    try {
+      const deviceId = await getDeviceId();
+      if (isFavorite) {
+        const { error } = await supabase.from('favorites').delete().eq('novel_id', id).eq('device_id', deviceId);
+        if (error) {
+          alert('محفوظ نہیں ہو سکا، دوبارہ کوشش کریں۔');
+          return;
+        }
+      } else {
+        const { error } = await supabase.from('favorites').insert({ novel_id: id, device_id: deviceId });
+        if (error) {
+          alert('محفوظ نہیں ہو سکا، دوبارہ کوشش کریں۔');
+          return;
+        }
+      }
+      setIsFavorite(!isFavorite);
+    } catch (e) {
+      alert('محفوظ نہیں ہو سکا، دوبارہ کوشش کریں۔');
     }
-    setIsFavorite(!isFavorite);
   };
 
   const handleRate = async (rating: number) => {
-    const deviceId = await getDeviceId();
-    await supabase.from('ratings').upsert({
-      device_id: deviceId,
-      novel_id: id,
-      rating,
-      updated_at: new Date().toISOString()
-    }, { onConflict: 'device_id, novel_id' });
-    setUserRating(rating);
-    fetchNovel();
+    try {
+      const deviceId = await getDeviceId();
+      const { error } = await supabase.from('ratings').upsert({
+        device_id: deviceId,
+        novel_id: id,
+        rating,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'device_id,novel_id' });
+      if (error) {
+        alert('محفوظ نہیں ہو سکا، دوبارہ کوشش کریں۔');
+        return;
+      }
+      setUserRating(rating);
+      fetchNovel();
+    } catch (e) {
+      alert('محفوظ نہیں ہو سکا، دوبارہ کوشش کریں۔');
+    }
   };
 
   if (loading) {
@@ -129,7 +149,13 @@ export default function NovelDetails() {
           <BackIcon size={24} color={theme.onSurface} />
         </Pressable>
       </View>
-      <Image source={{ uri: novel.cover_image_url }} style={styles.cover} />
+      {novel.cover_image_url ? (
+        <Image source={{ uri: novel.cover_image_url }} style={styles.cover} />
+      ) : (
+        <View style={[styles.cover, styles.coverPlaceholder, { backgroundColor: theme.surfaceContainer }]}>
+          <BookOpen size={48} color={theme.secondary} />
+        </View>
+      )}
       <View style={styles.content}>
         <Text style={[typography.headlineLg, { color: theme.onSurface }]}>{novel.title}</Text>
         <Text style={[typography.bodyMd, { color: theme.onSurfaceVariant, marginBottom: 8 }]}>{novel.author}</Text>
@@ -177,6 +203,15 @@ export default function NovelDetails() {
           </Text>
         </Pressable>
 
+        <Pressable
+          style={[styles.secondaryButton, { borderColor: theme.secondary }]}
+          onPress={() => router.push(`/novel/${id}/episodes` as any)}
+        >
+          <Text style={[typography.labelMd, { color: theme.secondary }]}>
+            تمام اقساط دیکھیں
+          </Text>
+        </Pressable>
+
         <Pressable style={styles.favButton} onPress={toggleFavorite}>
           <Heart size={20} color={theme.secondary} fill={isFavorite ? theme.secondary : 'transparent'} />
           <Text style={{ color: theme.secondary, marginLeft: 8 }}>
@@ -208,12 +243,14 @@ const styles = StyleSheet.create({
   centerState: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   topBar: { paddingHorizontal: 16, paddingVertical: 8 },
   cover: { width: '100%', height: 300 },
+  coverPlaceholder: { justifyContent: 'center', alignItems: 'center' },
   content: { padding: 16 },
   badges: { flexDirection: 'row', gap: 8, marginBottom: 12 },
   badge: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 4, borderWidth: 1 },
   ratingRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 16 },
   stars: { flexDirection: 'row', gap: 4 },
   button: { padding: 16, borderRadius: 4, alignItems: 'center', marginBottom: 12 },
+  secondaryButton: { padding: 14, borderRadius: 4, borderWidth: 1, alignItems: 'center', marginBottom: 12 },
   favButton: { flexDirection: 'row', alignItems: 'center', padding: 8, marginBottom: 16 },
   rateSection: { marginTop: 8 }
 });

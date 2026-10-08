@@ -33,50 +33,104 @@ This implementation plan is structured step-by-step according to the requirement
 
 ## Step 10: Reader App — Search, Favorites, Profile, and Settings Screens — [DONE]
 - **Goal:** Build remaining reader app tabs and screens (Search, Favorites, Profile/My Activity, and Settings).
-- **Actions Completed:**
-  - Built Search screen (`app/(tabs)/search.tsx`) with real-time `ilike` title search against Supabase.
-  - Built Favorites screen (`app/(tabs)/favorites.tsx`) querying device favorites joined with novels.
-  - Built Profile / My Activity screen (`app/(tabs)/profile.tsx`) allowing editable reader display name synced to Supabase `readers` and AsyncStorage.
-  - Built Settings screen (`app/settings.tsx`) with instant Theme selector (System / Dark / Light) persisted to AsyncStorage and applied via ThemeProvider.
-- **How to verify:** Open the mobile app tabs in Expo, test search, add/view favorites, edit profile name, and toggle themes in settings.
-
----
 
 ## Step 11: Mobile Wiring & Polish Pass — [DONE]
 - **Goal:** Verify end-to-end integration, RTL correctness, loading/empty states, and pull-to-refresh across `abr-mobile`.
-- **Actions Completed:**
-  - Added pull-to-refresh on Home, Search, and Favorites screens.
-  - Added loading spinners and error states ("couldn't load, pull to retry") to all screens fetching from Supabase.
-  - Added un-favorite heart toggle directly on Favorites screen cards.
-  - Added star rating widget (view avg + tap to rate) on Novel Details screen.
-  - Added font-size controls (A+/A-) and prev/next navigation buttons on Reading screen.
-  - Added category/age-rating badges on Novel Details screen.
-  - Verified RTL alignment, device ID usage, and theme persistence across all screens.
-- **Files:** `abr-mobile/app/(tabs)/index.tsx`, `abr-mobile/app/(tabs)/search.tsx`, `abr-mobile/app/(tabs)/favorites.tsx`, `abr-mobile/app/novel/[id].tsx`, `abr-mobile/app/read/[episodeId].tsx`
-- **How to verify:** Test complete reader user journey on mobile simulator/device — pull-to-refresh, loading states, error states, rating, favorites, font controls.
-
----
 
 ## Step 12: Admin Dashboard (Analytics) — [DONE]
 - **Goal:** Build the Admin Dashboard analytics page in `abr-admin`.
-- **Actions Completed:**
-  - Created `DashboardPage.tsx` with 4 stat cards (Total Novels, Total Episodes, Total Reads, Avg Rating) matching the design reference.
-  - Implemented "Reads over Time" area chart using Recharts with gold accent color and gradient fill.
-  - Implemented "Category Breakdown" panel with progress bars and percentage labels.
-  - Integrated Dashboard into sidebar navigation with `LayoutDashboard` icon.
-  - All stats computed from real Supabase data (counts, averages, time-series grouping).
-- **Files:** `abr-admin/src/pages/DashboardPage.tsx`, `abr-admin/src/App.tsx`
-- **How to verify:** Open admin panel, click "Dashboard" in sidebar, verify stat cards and charts render with real data.
 
 ## Step 13: Final Code Review & Cleanup — [DONE]
 - **Goal:** Perform code review, remove placeholder data, ensure security rules and env configs.
-- **Actions Completed:**
-  - **Env configs:** removed the hardcoded Supabase URL/anon key from `abr-mobile/src/lib/supabase.ts` and `abr-admin/src/lib/supabase.ts` (the admin fallback key was also malformed). Both clients now read `EXPO_PUBLIC_SUPABASE_URL`/`EXPO_PUBLIC_SUPABASE_ANON_KEY` (Expo) and `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` (Vite) and fail fast with a clear message when unset. Added `.env.example` to both projects, added `expo-env.d.ts` for typing, and git-ignored `.env` in both projects.
-  - **Security rules (`supabase/schema.sql`):** public episode reads now require the parent novel to be `published` (a published episode can no longer leak from a draft novel); device-scoped tables (readers/favorites/reading_progress/ratings) now require a non-empty `device_id` on writes, with the intentional v1 openness documented; added `updated_at` triggers for novels/episodes/ratings; added `novel-covers` bucket creation plus storage policies (public read, authenticated write).
-  - **Placeholder data removed:** fake dashboard subtexts ("+2 this month", "+15 this week", "+5% vs last week") replaced with real computed values (novels last 30 days, episodes last 7 days, reads week-over-week delta); splash screen placeholder square replaced with a real logo mark + ABR wordmark; deleted leftover Expo template files (`app/(tabs)/two.tsx`, `app/modal.tsx`, template `components/`, `constants/Colors.ts`, SpaceMono font).
-  - **Review fixes:** fixed Urdu typography (`fontFamily` now matches the loaded `@expo-google-fonts` keys, so Noto Nastaliq Urdu actually renders); Novel Details "Start Reading" now resumes the last-read episode ("Continue Reading") or falls back to episode 1, with a back button; Search now debounces (300ms) and matches title, author, and category (with quote-escaping); Reading screen prev/next buttons now navigate real adjacent episodes and progress saves on screen exit; tab bar labels switched to Urdu; admin cover-upload filenames sanitized; `app.json` `userInterfaceStyle` set to `automatic` so light theme works; web root HTML uses the app background.
-  - Verified no reader-facing screen asks for login/email/password.
-  - Verified gold accent + 4-6px corner radius consistency across both projects.
-  - Confirmed only the anon key is used (no service_role key anywhere).
-- **Files:** `abr-mobile/src/lib/supabase.ts`, `abr-admin/src/lib/supabase.ts`, `abr-mobile/.env.example`, `abr-admin/.env.example`, `abr-mobile/expo-env.d.ts`, `abr-mobile/.gitignore`, `abr-admin/.gitignore`, `supabase/schema.sql`, `abr-admin/src/pages/DashboardPage.tsx`, `abr-mobile/app/index.tsx`, `abr-mobile/src/theme/typography.ts`, `abr-mobile/app/novel/[id].tsx`, `abr-mobile/app/(tabs)/search.tsx`, `abr-mobile/app/(tabs)/_layout.tsx`, `abr-mobile/app/read/[episodeId].tsx`, `abr-mobile/app/+html.tsx`, `abr-mobile/app/+not-found.tsx`, `abr-mobile/app.json`, `abr-admin/src/App.tsx`, `README.md`
-- **How to verify:** `cp .env.example .env` in each app with real Supabase values, run both apps, confirm Urdu renders in Nastaliq, confirm drafts are invisible to readers, confirm dashboard subtexts reflect real data, and confirm `.env` is not tracked by git.
+
+## Steps P1–P7: Privacy Policy Integration — [DONE]
+- **Goal:** Add bilingual Privacy Policy in-app, hosted web page, settings link, name-prompt agreement, and data deletion feature.
+
+---
+
+## Step 14 (Group A) — Fix app building and running blockers — [DONE]
+
+- **Goal:** Fix all issues that prevent the apps from building or running.
+- **Sub-items:**
+  - **A1. Wrong import paths:**
+    - `abr-admin/src/App.tsx` line 2: change `'../lib/supabase'` → `'./lib/supabase'` (fixes `npm run build` failure).
+    - `abr-mobile/app/settings.tsx`: change `'../../src/...'` → `'../src/...'`.
+    - `abr-mobile/app/novel/[id].tsx` and `abr-mobile/app/read/[episodeId].tsx`: change `'../../../src/...'` → `'../../src/...'`.
+    - Leave `abr-mobile/app/novel/[id]/episodes.tsx` as-is (already correct `'../../../src/...'`).
+    - Leave `abr-mobile/src/pages/DashboardPage.tsx` as-is (already correct).
+  - **A2. Wrong route param in Reading screen:**
+    - `abr-mobile/app/read/[episodeId].tsx` uses `const { id } = useLocalSearchParams()` but the dynamic route is named `episodeId`. Change to read `episodeId` and update every usage of `id` in that file (fetch, saveProgress, episodeIdRef, sibling lookup, useEffect dependencies).
+  - **A3. Non-existent icons from lucide-react-native:**
+    - `ArrowBack` and `ArrowForward` are not exported by `lucide-react-native` — crashes with "Element type is invalid".
+    - Affected files: `app/novel/[id].tsx`, `app/read/[episodeId].tsx`, `app/novel/[id]/episodes.tsx`.
+    - Replace `ArrowBack` → `ArrowLeft`, `ArrowForward` → `ArrowRight`, keeping the existing `I18nManager.isRTL ? ... : ...` logic.
+    - Leave `Feather`, `Heart`, `Star`, `Settings`, `ChevronLeft`, `ChevronRight` (these exist).
+  - **A4. Wrong asset paths in `abr-mobile/app.json`:**
+    - `icon`: `./assets/icon.png` → `./assets/images/icon.png`
+    - `splash.image`: `./assets/splash-icon.png` → `./assets/images/splash-icon.png`
+    - `android.adaptiveIcon.foregroundImage`: `./assets/adaptive-icon.png` → `./assets/images/android-icon-foreground.png`
+    - `web.favicon`: `./assets/favicon.png` → `./assets/images/favicon.png`
+    - Check whether images are real ABR branding or default Expo template icons — ask owner before replacing.
+- **Files:** `abr-admin/src/App.tsx`, `abr-mobile/app/settings.tsx`, `abr-mobile/app/novel/[id].tsx`, `abr-mobile/app/read/[episodeId].tsx`, `abr-mobile/app/novel/[id]/episodes.tsx`, `abr-mobile/app.json`
+- **Needs from owner:** Approval. Confirmation on whether asset images need replacing.
+- **How to verify:** `npm run build` in `abr-admin`; `npx tsc --noEmit`, `npx expo export --platform android`, and `npx expo-doctor` in `abr-mobile`. Then owner opens: Home, a novel, an episode (text shows), Settings.
+
+## Step 15 (Group B) — Fix broken or missing features — [DONE]
+
+- **Goal:** Restore features that are broken or missing compared with the spec.
+- **Sub-items:**
+  - **B1. Episodes List unreachable:** Novel Details has no "View all episodes" link (spec section 5.4 requires one). Add a secondary button below "Start/Continue Reading" that navigates to `/novel/{id}/episodes`.
+  - **B2. Reading position not restored:** `reading_progress.scroll_position` exists but the Reading screen never saves it and always opens at the top. Save scroll offset alongside `progress_percent`; on episode open, scroll back to the saved position for this device.
+  - **B3. Reading screen stacks screens:** Previous/Next use `router.push`, so going through 5 episodes needs 5 back presses. Change to `router.replace`.
+  - **B4. Settings has no back button/header:** Root Stack has `headerShown: false`. Add a top bar with a back button and title matching other screens.
+  - **B5. Tab bar has no icons:** Spec asks for icons with labels (home, search, favorite, profile). Add thin line icons from `lucide-react-native` with gold active color. Ask owner if unsure which icon.
+  - **B6. Missing cover image handling:** `cover_image_url` can be empty. `<Image source={{ uri: undefined }}>` shows blank box + warnings on Home, Favorites, Novel Details, Continue Reading. Show a placeholder block (surface color + book icon) when no cover.
+  - **B7. Spec gap resolution (Owner confirmed YES):**
+    - Add reading font-size preference to Settings (persisted to AsyncStorage and applied globally in Reading screen).
+    - Add theme toggle control (Light/Dark/System) in the Reading screen top bar.
+    - Nothing else — do not add features beyond what is listed.
+- **Files:** `abr-mobile/app/novel/[id].tsx`, `abr-mobile/app/read/[episodeId].tsx`, `abr-mobile/app/settings.tsx`, `abr-mobile/app/(tabs)/_layout.tsx`, Home/Favorites/novel card components.
+- **Needs from owner:** Approval to start Group B execution.
+- **How to verify:** Test episodes list navigation, scroll position save/restore, prev/next replaces not pushes, settings header, tab bar icons, cover placeholder, font size persistence, and reading screen theme toggle.
+
+## Step 16 (Group C) — Fix silent failures and data correctness — [DONE]
+
+- **Goal:** Ensure Supabase errors are surfaced to the user and data is written correctly.
+- **Sub-items:**
+  - **C1. Writes ignore errors:** Supabase returns `{ error }` instead of throwing; the code ignores it, so the UI shows success even when saving failed. Fix in: favorite toggle and rating in `novel/[id].tsx`, un-favorite in `favorites.tsx`, name save in `name-prompt.tsx` and `profile.tsx`, and progress save in Reading screen. On error: do not update UI as if it worked; show a short Urdu message (e.g. "محفوظ نہیں ہو سکا، دوبارہ کوشش کریں۔"). For the first-launch name prompt: ask owner what should happen if offline — (1) block and show error, or (2) continue and retry later.
+  - **C2. Name saved untrimmed:** `name-prompt.tsx` and `profile.tsx` check `name.trim()` but save the untrimmed value. Save the trimmed value and add `maxLength={40}` to both inputs.
+  - **C3. `.single()` where row may not exist:** In `novel/[id].tsx` the favorites and own-rating lookups use `.single()`, which errors when no row exists. Change to `.maybeSingle()`.
+  - **C4. `onConflict` strings contain a space:** `'device_id, episode_id'` and `'device_id, novel_id'` → `'device_id,episode_id'` and `'device_id,novel_id'`.
+  - **C5. Weak fallback device ID:** `src/lib/deviceId.ts` uses `Math.random()` as fallback — not unique enough. Proposed fix: generate UUID via `expo-crypto` (`Crypto.randomUUID()`), store it, stop using Android hardware ID. Ask owner before changing — this also affects what the Privacy Policy must say.
+- **Files:** `abr-mobile/app/novel/[id].tsx`, `abr-mobile/app/(tabs)/favorites.tsx`, `abr-mobile/app/name-prompt.tsx`, `abr-mobile/app/(tabs)/profile.tsx`, `abr-mobile/app/read/[episodeId].tsx`, `abr-mobile/src/lib/deviceId.ts`
+- **Needs from owner:** Approval. Decision on offline name-prompt behavior (C1). Decision on device ID change and privacy policy update (C5).
+- **How to verify:** Test error handling by simulating failures, verify input trimming/maxLength, confirm `.maybeSingle()` doesn't error on missing rows, check `onConflict` works, verify device ID generation.
+
+## Step 17 (Group D) — First-launch RTL — [DONE]
+
+- **Goal:** Ensure RTL is correctly applied on the very first launch, not just from the second launch onward.
+- **Problem:** `app/_layout.tsx` calls `I18nManager.forceRTL(true)` but React Native only applies this after a restart, so fresh installs render LTR on first launch.
+- **Actions:** Propose a fix (e.g. reload the app once after forcing RTL using `expo-updates` `reloadAsync()` in release builds, or an alternative). Ask owner before adding any dependency. Test on a real Android device or emulator with a clean install and report result.
+- **Files:** `abr-mobile/app/_layout.tsx`, possibly `abr-mobile/package.json`
+- **Needs from owner:** Approval before adding any dependency.
+- **How to verify:** Clean install on emulator/device — first launch should be RTL.
+
+## Step 18 (Group E) — Security risk assessment & explanation — [DONE]
+
+- **Goal:** Explain the security risk of open RLS policies. Do NOT change any code without owner approval.
+- **Problem:** `supabase/schema.sql` makes `readers`, `favorites`, `reading_progress`, and `ratings` fully open (`for all using (true)`). Anyone with the public anon key can read every reader's display name and delete/edit any device's favorites, progress, and ratings.
+- **Actions:** Write a plain-language explanation of the risk and one proposed solution (e.g. send device ID as a request header, write RLS policies matching that header, use a DB view/function for aggregate ratings, keep admin dashboard working with authenticated read). List what would change in the app and the SQL. Ask owner whether to implement now or after release.
+- **Files:** None (explanation only — no code changes until approved).
+- **Needs from owner:** Decision on whether to implement now or post-release.
+- **How to verify:** Owner reviews the explanation.
+
+## Step 19 — Final check after all approved groups — [DONE]
+
+- **Goal:** Verify the full project after all fixes and update documentation.
+- **Actions:**
+  - Re-run the Group A verification commands (`npm run build` in `abr-admin`, `npx tsc --noEmit` + `npx expo export --platform android` + `npx expo-doctor` in `abr-mobile`).
+  - Update `CONTEXT.md`, `IMPLEMENTATION_PLAN.md`, and `README.md` if anything changed.
+  - Provide a short summary of what was fixed and what was skipped.
+- **Files:** `CONTEXT.md`, `IMPLEMENTATION_PLAN.md`, `README.md`
+- **Needs from owner:** None.
+- **How to verify:** Verification command output + owner review.

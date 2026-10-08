@@ -152,31 +152,70 @@ create policy "Admin can delete episodes" on episodes
   for delete using (auth.role() = 'authenticated');
 
 -- Readers / Favorites / Reading Progress / Ratings:
--- v1 has no reader auth, so readers self-report their device_id and row
--- ownership cannot be verified server-side (any client that knows a
--- device_id can read/write that device's rows). This openness is
--- intentional for v1 per the project spec; revisit when reader auth exists.
--- Writes must at least carry a non-empty device_id.
+-- Access is scoped to matching custom HTTP header 'x-device-id' (sent by mobile app)
+-- or to authenticated admin users (for dashboard analytics).
 
+-- Create rating summary view so public can query average rating without exposing raw device ratings
+create or replace view novel_rating_summaries as
+select
+  novel_id,
+  count(*)::integer as rating_count,
+  round(avg(rating)::numeric, 1)::float as avg_rating
+from ratings
+group by novel_id;
+
+-- RLS policies checking x-device-id header or authenticated admin
 drop policy if exists "Anyone can manage reader profile" on readers;
 drop policy if exists "Anyone can manage their own reader profile" on readers;
-create policy "Anyone can manage their own reader profile" on readers
-  for all using (true) with check (device_id is not null and device_id <> '');
+drop policy if exists "Device-scoped reader profile" on readers;
+create policy "Device-scoped reader profile" on readers
+  for all using (
+    device_id = coalesce(current_setting('request.headers', true)::json->>'x-device-id', '')
+    or auth.role() = 'authenticated'
+  )
+  with check (
+    device_id = coalesce(current_setting('request.headers', true)::json->>'x-device-id', '')
+    or auth.role() = 'authenticated'
+  );
 
 drop policy if exists "Anyone can manage favorites" on favorites;
 drop policy if exists "Anyone can manage their own favorites" on favorites;
-create policy "Anyone can manage their own favorites" on favorites
-  for all using (true) with check (device_id is not null and device_id <> '');
+drop policy if exists "Device-scoped favorites" on favorites;
+create policy "Device-scoped favorites" on favorites
+  for all using (
+    device_id = coalesce(current_setting('request.headers', true)::json->>'x-device-id', '')
+    or auth.role() = 'authenticated'
+  )
+  with check (
+    device_id = coalesce(current_setting('request.headers', true)::json->>'x-device-id', '')
+    or auth.role() = 'authenticated'
+  );
 
 drop policy if exists "Anyone can manage reading progress" on reading_progress;
 drop policy if exists "Anyone can manage their own reading progress" on reading_progress;
-create policy "Anyone can manage their own reading progress" on reading_progress
-  for all using (true) with check (device_id is not null and device_id <> '');
+drop policy if exists "Device-scoped reading progress" on reading_progress;
+create policy "Device-scoped reading progress" on reading_progress
+  for all using (
+    device_id = coalesce(current_setting('request.headers', true)::json->>'x-device-id', '')
+    or auth.role() = 'authenticated'
+  )
+  with check (
+    device_id = coalesce(current_setting('request.headers', true)::json->>'x-device-id', '')
+    or auth.role() = 'authenticated'
+  );
 
 drop policy if exists "Anyone can manage ratings" on ratings;
 drop policy if exists "Anyone can manage their own ratings" on ratings;
-create policy "Anyone can manage their own ratings" on ratings
-  for all using (true) with check (device_id is not null and device_id <> '');
+drop policy if exists "Device-scoped ratings" on ratings;
+create policy "Device-scoped ratings" on ratings
+  for all using (
+    device_id = coalesce(current_setting('request.headers', true)::json->>'x-device-id', '')
+    or auth.role() = 'authenticated'
+  )
+  with check (
+    device_id = coalesce(current_setting('request.headers', true)::json->>'x-device-id', '')
+    or auth.role() = 'authenticated'
+  );
 
 -- Notifications: Public can view notifications, admin can insert
 drop policy if exists "Public can view notifications" on notifications;

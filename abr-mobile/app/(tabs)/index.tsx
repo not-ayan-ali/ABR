@@ -5,6 +5,7 @@ import { supabase } from '../../src/lib/supabase';
 import { useTheme } from '../../src/theme/ThemeProvider';
 import { typography } from '../../src/theme/typography';
 import { getDeviceId } from '../../src/lib/deviceId';
+import { BookOpen } from 'lucide-react-native';
 
 export default function Home() {
   const [novels, setNovels] = useState<any[]>([]);
@@ -68,7 +69,13 @@ export default function Home() {
       style={[styles.card, { borderColor: theme.outlineVariant, backgroundColor: theme.surfaceContainer }]}
       onPress={() => router.push(`/novel/${item.id}` as any)}
     >
-      <Image source={{ uri: item.cover_image_url }} style={styles.cover} />
+      {item.cover_image_url ? (
+        <Image source={{ uri: item.cover_image_url }} style={styles.cover} />
+      ) : (
+        <View style={[styles.cover, styles.coverPlaceholder, { backgroundColor: theme.surfaceContainerHigh }]}>
+          <BookOpen size={32} color={theme.secondary} />
+        </View>
+      )}
       <View style={styles.cardInfo}>
         <Text style={[typography.labelMd, { color: theme.onSurface, textAlign: 'right' }]} numberOfLines={1}>{item.title}</Text>
         <Text style={[typography.labelSm, { color: theme.onSurfaceVariant, textAlign: 'right' }]} numberOfLines={1}>{item.author}</Text>
@@ -95,7 +102,13 @@ export default function Home() {
           style={[styles.hero, { borderColor: theme.outlineVariant, backgroundColor: theme.surfaceContainerHigh }]}
           onPress={() => router.push(`/novel/${novels[0].id}` as any)}
         >
-          {novels[0].cover_image_url && <Image source={{ uri: novels[0].cover_image_url }} style={styles.heroCover} />}
+          {novels[0].cover_image_url ? (
+            <Image source={{ uri: novels[0].cover_image_url }} style={styles.heroCover} />
+          ) : (
+            <View style={[styles.heroCover, styles.coverPlaceholder, { backgroundColor: theme.surfaceContainer }]}>
+              <BookOpen size={48} color={theme.secondary} />
+            </View>
+          )}
           <View style={styles.heroContent}>
             <Text style={[typography.headlineMd, { color: theme.onSurface, textAlign: 'right' }]}>{novels[0].title}</Text>
             <Text style={[typography.bodyMd, { color: theme.onSurfaceVariant, textAlign: 'right' }]} numberOfLines={2}>{novels[0].synopsis}</Text>
@@ -114,7 +127,13 @@ export default function Home() {
                 style={[styles.continueCard, { borderColor: theme.outlineVariant, backgroundColor: theme.surfaceContainer }]}
                 onPress={() => router.push(`/read/${item.episodeId}` as any)}
               >
-                <Image source={{ uri: item.cover_image_url }} style={styles.continueCover} />
+                {item.cover_image_url ? (
+                  <Image source={{ uri: item.cover_image_url }} style={styles.continueCover} />
+                ) : (
+                  <View style={[styles.continueCover, styles.coverPlaceholder, { backgroundColor: theme.surfaceContainerHigh }]}>
+                    <BookOpen size={32} color={theme.secondary} />
+                  </View>
+                )}
                 <View style={styles.continueInfo}>
                   <Text style={[typography.labelMd, { color: theme.onSurface, textAlign: 'right' }]} numberOfLines={1}>{item.title}</Text>
                   <View style={[styles.miniProgressBar, { backgroundColor: theme.surfaceBright }]}>
@@ -155,6 +174,7 @@ const styles = StyleSheet.create({
   heroContent: { padding: 16 },
   card: { flex: 1, margin: 8, borderRadius: 6, borderWidth: 1, overflow: 'hidden' },
   cover: { width: '100%', height: 160 },
+  coverPlaceholder: { justifyContent: 'center', alignItems: 'center' },
   cardInfo: { padding: 8 },
   list: { paddingHorizontal: 8, paddingBottom: 24 },
   continueCard: { width: 140, marginLeft: 12, borderRadius: 6, borderWidth: 1, overflow: 'hidden' },

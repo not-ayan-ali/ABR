@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { getDeviceId } from './deviceId'
 
 // Values are inlined at build time from abr-mobile/.env (see .env.example).
 // Only the public anon key is used here — never put a service_role key in this app.
@@ -11,8 +12,19 @@ if (!supabaseUrl || !supabaseAnonKey) {
   )
 }
 
+// Custom fetch wrapper that dynamically attaches the persistent x-device-id header
+const customFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+  const deviceId = await getDeviceId()
+  const headers = new Headers(init?.headers || {})
+  headers.set('x-device-id', deviceId)
+  return fetch(input, { ...init, headers })
+}
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     persistSession: false,
+  },
+  global: {
+    fetch: customFetch,
   },
 })

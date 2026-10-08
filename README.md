@@ -63,6 +63,9 @@ npm run build          # produces dist/
 variables in the Netlify dashboard (Site settings > Environment
 variables): `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
 
+**Hosted Privacy Policy URL:** Once deployed to Netlify (or your custom domain), the Privacy Policy web page is publicly available at:
+`https://<your-netlify-site>/privacy.html` (e.g. `https://abr-app.netlify.app/privacy.html`).
+
 ### Building `abr-mobile` for release
 `eas.json` is configured (`production` profile builds an Android App
 Bundle). Run:

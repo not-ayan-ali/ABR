@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabase } from './lib/supabase'
 import { BookOpen, LogOut, Library, Plus, Search, Trash2, Edit, X, ArrowLeft, AlignLeft, AlignCenter, AlignRight, LayoutDashboard } from 'lucide-react'
 import DashboardPage from './pages/DashboardPage'
 

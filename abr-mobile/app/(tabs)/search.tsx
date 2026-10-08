@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import { supabase } from '../../src/lib/supabase';
 import { useTheme } from '../../src/theme/ThemeProvider';
 import { typography } from '../../src/theme/typography';
+import { BookOpen } from 'lucide-react-native';
 
 const SEARCH_DEBOUNCE_MS = 300;
 
@@ -126,7 +127,13 @@ export default function SearchScreen() {
             style={[styles.card, { borderColor: theme.outlineVariant, backgroundColor: theme.surfaceContainer }]}
             onPress={() => router.push(`/novel/${item.id}` as any)}
           >
-            <Image source={{ uri: item.cover_image_url }} style={styles.cover} />
+            {item.cover_image_url ? (
+              <Image source={{ uri: item.cover_image_url }} style={styles.cover} />
+            ) : (
+              <View style={[styles.cover, styles.coverPlaceholder, { backgroundColor: theme.surfaceContainerHigh }]}>
+                <BookOpen size={24} color={theme.secondary} />
+              </View>
+            )}
             <View style={styles.info}>
               <Text style={[typography.labelMd, { color: theme.onSurface }]}>{item.title}</Text>
               <Text style={[typography.labelSm, { color: theme.onSurfaceVariant }]}>{item.author}</Text>
@@ -146,6 +153,7 @@ const styles = StyleSheet.create({
   input: { width: '100%', padding: 12, borderRadius: 4, borderWidth: 1, marginBottom: 16, textAlign: 'right' },
   card: { flexDirection: 'row', marginBottom: 12, borderRadius: 6, borderWidth: 1, overflow: 'hidden' },
   cover: { width: 60, height: 80 },
+  coverPlaceholder: { justifyContent: 'center', alignItems: 'center' },
   info: { padding: 8, justifyContent: 'center' },
   centerState: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 60 },
   listContent: { flexGrow: 1 }

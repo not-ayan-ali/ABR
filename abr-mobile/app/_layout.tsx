@@ -17,13 +17,18 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
-// Force RTL
+import * as Updates from 'expo-updates';
+
+// Force RTL on first launch and reload if layout direction was LTR
 if (!I18nManager.isRTL) {
-  I18nManager.forceRTL(true);
   I18nManager.allowRTL(true);
-  // On some versions of Expo/React Native, a reload is needed after forcing RTL
+  I18nManager.forceRTL(true);
   if (Platform.OS !== 'web') {
-    // Updates might be needed here but forceRTL usually works after restart
+    try {
+      Updates.reloadAsync();
+    } catch (e) {
+      // Ignored in dev / unsupported environments
+    }
   }
 }
 
